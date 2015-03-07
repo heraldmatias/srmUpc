@@ -1,0 +1,7 @@
+1||2 de Mayo||Av. Alfonso Ugarte cdra 4 y 5 con Plaza Dos de Mayo, Cercado de Lima||metropilitano||Regular B,Expreso 4
+2||28 de julio||Av. Paseo de la República cdra 61 con Puente Miraflores, Miraflores||metropilitano||Regular B,Regular C
+3||Angamos||Av. Paseo de la República cdra 48 con Puente Angamos, San Isidro||metropilitano||Regular B,Regular C,Expreso 4
+4||Aramburú||Av. Paseo de la República cdra 37 con Puente Aramburú, San Isidro||metropilitano||Regular B,Regular C
+5||Balta||Av. República de Panamá (Bolognesi) cdra 10 con óvalo Balta, Barranco||metropilitano||Regular B,Regular C
+6||Benavides||Av. Paseo de la República cdra 59 con Puente Benavides, Miraflores||metropilitano||Regular B,Regular C
+7||Canadá||Av. Paseo de la República cdra 19 con Puente Canadá, Lince/La Victoria||metropilitano||Regular B,Regular C
