@@ -2,6 +2,10 @@ package pe.edu.upc.municipalidad.central.beans;
 
 public class Ubicacion {
 
+	private Long id;
+	
+	private Long estacion;
+	
 	private String longitud;
 
 	private String latitud;
@@ -18,6 +22,18 @@ public class Ubicacion {
 	}
 	public void setLongitud(String longitud) {
 		this.longitud = longitud;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getEstacion() {
+		return estacion;
+	}
+	public void setEstacion(Long estacion) {
+		this.estacion = estacion;
 	}
 	
 	

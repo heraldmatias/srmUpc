@@ -1,5 +1,6 @@
 package pe.edu.upc.municipalidad.central.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +13,24 @@ public class DataFile {
 
 	@Autowired
 	private Propiedades properties;
+	
+	@Autowired
+	private DataInstance dataInstance;
 
-
-	public List<Estacion> getEstaciones() {		
-		ReaderFileUtil readerFileUtil = ReaderFileUtil.getInstace();	
-		StringBuffer info = readerFileUtil.getData(properties.getValue(EntidadesFile.INFO_ESTACION.getTipo()));
-		List<Estacion> listaEstaciones = transforTextoEstacion(info);
-		return listaEstaciones;
-	}
-
-	private List<Estacion> transforTextoEstacion(StringBuffer info) {
-		
-		return null;
+	public List<Estacion> getEstaciones() {
+		return dataInstance.getLista();
 	}
 
 	public List<Estacion> getEstaciones(String tipoServicio) {
-		
-		return null;
+		 List<Estacion> lst = new ArrayList<Estacion>();	
+		 List<Estacion>  oi = dataInstance.getLista();
+		 for (Estacion estacion : oi) {
+			if(estacion.getTipoServicio().equals(tipoServicio)){
+				lst.add(estacion);
+			}
+		}
+		return lst;
 	}
+
 
 }

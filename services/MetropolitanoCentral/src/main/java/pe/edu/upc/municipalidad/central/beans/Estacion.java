@@ -4,6 +4,7 @@ public class Estacion {
 
 	private Long id;
 	private String nombre;
+	private String direccion;
 	private String tipoServicio;
 	private String subServicios;
 	private String[] transportes;
@@ -51,6 +52,12 @@ public class Estacion {
 	}
 	public void setSubServicios(String subServicios) {
 		this.subServicios = subServicios;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	
 	

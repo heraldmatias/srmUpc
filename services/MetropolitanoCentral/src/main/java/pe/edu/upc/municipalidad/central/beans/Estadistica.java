@@ -3,7 +3,8 @@ package pe.edu.upc.municipalidad.central.beans;
 
 public class Estadistica {
 
-
+	private Long id;
+	private Long estacion;
 	private String horaInicio;
 	private String horaFin;
 	private Double cantidad;
@@ -25,6 +26,18 @@ public class Estadistica {
 	}
 	public void setCantidad(Double cantidad) {
 		this.cantidad = cantidad;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getEstacion() {
+		return estacion;
+	}
+	public void setEstacion(Long estacion) {
+		this.estacion = estacion;
 	}
 
 	

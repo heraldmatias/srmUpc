@@ -43,7 +43,7 @@ public class MetropolitanoController {
 	public @ResponseBody List<Estacion> getEstaciones() {
 		return datefile.getEstaciones();
 	}
-	
+
 	@RequestMapping(value="/Estaciones/{tipoServicio}", method = RequestMethod.GET)
 	public @ResponseBody List<Estacion> getEstaciones(@PathVariable String tipoServicio) {
 		
