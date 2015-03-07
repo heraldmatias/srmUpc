@@ -18,6 +18,8 @@ public class DataFile {
 	private DataInstance dataInstance;
 
 	public List<Estacion> getEstaciones() {
+		System.out.println(dataInstance.getEstadisticas());
+		System.out.println(dataInstance.getUbicacions());
 		return dataInstance.getLista();
 	}
 
