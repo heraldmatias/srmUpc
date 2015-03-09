@@ -1,5 +1,7 @@
 package pe.edu.upc.municipalidad.central.beans;
 
+import java.util.List;
+
 public class Estacion {
 
 	private Long id;
@@ -9,7 +11,7 @@ public class Estacion {
 	private String subServicios;
 	private String[] transportes;
 	private Ubicacion ubicacion;
-	private Estadistica estadistica;
+	private List<Estadistica> estadisticas;
 	
 	public Long getId() {
 		return id;
@@ -29,11 +31,12 @@ public class Estacion {
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-	public Estadistica getEstadistica() {
-		return estadistica;
+
+	public List<Estadistica> getEstadisticas() {
+		return estadisticas;
 	}
-	public void setEstadistica(Estadistica estadistica) {
-		this.estadistica = estadistica;
+	public void setEstadisticas(List<Estadistica> estadisticas) {
+		this.estadisticas = estadisticas;
 	}
 	public String getTipoServicio() {
 		return tipoServicio;

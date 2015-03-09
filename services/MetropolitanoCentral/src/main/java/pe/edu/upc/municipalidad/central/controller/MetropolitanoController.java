@@ -19,50 +19,54 @@ import pe.edu.upc.municipalidad.central.beans.Estacion;
 import pe.edu.upc.municipalidad.central.data.DataFile;
 
 /**
- *	@author crossfire - Danielle Delgado
+ * @author crossfire - Danielle Delgado
  */
 @Controller
 public class MetropolitanoController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(MetropolitanoController.class);
-	
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(MetropolitanoController.class);
+
 	@Autowired
 	private DataFile datefile;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);		
+		logger.info("Welcome home! The client locale is {}.", locale);
 		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);		
-		String formattedDate = dateFormat.format(date);		
-		model.addAttribute("serverTime", formattedDate );
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+				DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate);
 		return "home";
 	}
 
-	@RequestMapping(value="/Estaciones", method = RequestMethod.GET)
+	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
 	public @ResponseBody List<Estacion> getEstaciones() {
 		return datefile.getEstaciones();
 	}
 
-	@RequestMapping(value="/Estaciones/{tipoServicio}", method = RequestMethod.GET)
-	public @ResponseBody List<Estacion> getEstaciones(@PathVariable String tipoServicio) {
-		
+	@RequestMapping(value = "/Estaciones/{tipoServicio}", method = RequestMethod.GET)
+	public @ResponseBody List<Estacion> getEstaciones(
+			@PathVariable String tipoServicio) {
 		return datefile.getEstaciones(tipoServicio);
 	}
-//
-//	@RequestMapping(value="/Estacion/{id}", method = RequestMethod.GET)
-//	public @ResponseBody Estacion getEstacion(@PathVariable Integer id) {
-//		return null;
-//	}
-//	@RequestMapping(value="/Estacion/Ubicacion/{longitud}/{latitud}", method = RequestMethod.GET)
-//	public @ResponseBody Estacion getEstacion(@PathVariable String longitud,@PathVariable String latitud) {
-//		return null;
-//	}
-//	
-//	@RequestMapping(value="/Estacion/Horario/{horaInicio}/{horafin}", method = RequestMethod.GET)
-//	public @ResponseBody Estacion getEstacionHorario(@PathVariable String horaInicio,@PathVariable String horafin) {
-//		return null;
-//	}
-	
-	
+
+	@RequestMapping(value = "/Estacion/{id}", method = RequestMethod.GET)
+	public @ResponseBody Estacion getEstacion(@PathVariable Integer id) {
+		Estacion e = datefile.getEstacion(new Long(id));
+		if (e != null) {
+			e.setEstadisticas(datefile.getEstadisticas(e.getId()));
+			e.setUbicacion(datefile.getUbicaciones(e.getId()));
+		}
+		return e;
+	}
+
+	@RequestMapping(value = "/Estacion/Horario/{tipoServicio}/{horaInicio}/{horafin}", method = RequestMethod.GET)
+	public @ResponseBody List<Estacion> getEstacionHorario(
+			@PathVariable String tipoServicio, @PathVariable String horaInicio,
+			@PathVariable String horafin) {
+		return datefile.getEstacionHorario(tipoServicio, horaInicio, horafin);
+	}
+
 }
