@@ -24,5 +24,6 @@
 	<context:component-scan base-package="pe.edu.upc.simulador.banco.controller" />
 	
 	
+	<beans:bean class="pe.edu.upc.simulador.banco.data.DataInstance" init-method="init"> </beans:bean>
 	
 </beans:beans>
