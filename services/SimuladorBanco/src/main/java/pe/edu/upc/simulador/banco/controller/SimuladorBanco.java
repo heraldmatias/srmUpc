@@ -53,10 +53,10 @@ public class SimuladorBanco {
 	}
 
 	@RequestMapping(value = "/tarjetas", method = RequestMethod.POST)
-	public @ResponseBody List<Tarjeta> validarTarjeta(String tipoTrajeta,
+	public @ResponseBody int validarTarjeta(String tipoTrajeta,
 			String numero_cuenta, String fechaVencimineto, String codSeguridad,
 			String clave, String dni) {
-		return datafile.validarTarjeta(tipoTrajeta,codSeguridad,numero_cuenta,fechaVencimineto,codSeguridad,clave,dni);
+		return datafile.validarTarjeta(tipoTrajeta,numero_cuenta,fechaVencimineto,codSeguridad,clave,dni);
 	}
 
 }

@@ -9,6 +9,7 @@ public class Tarjeta {
 	private String codSeguridad;
 	private String clave;
 	private String dni;
+	
 	public Long getId() {
 		return id;
 	}

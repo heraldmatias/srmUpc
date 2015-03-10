@@ -2,7 +2,7 @@ package pe.edu.upc.simulador.banco.data;
 
 public enum EntidadesFile {
 
-	TARJETA("ruta.archivo.info.estacion");
+	TARJETA("ruta.archivo.info.tarjeta");
 
 	private String tipo;
 

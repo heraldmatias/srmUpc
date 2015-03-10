@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="pe.edu.upc.simulador.banco.controller" />
+	<context:component-scan base-package="pe.edu.upc.simulador.banco" />
 	
 	
 	<beans:bean class="pe.edu.upc.simulador.banco.data.DataInstance" init-method="init"> </beans:bean>
