@@ -1,33 +1,55 @@
 package com.falcotech.srm;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
+import java.util.Arrays;
+import java.util.Set;
 
-public class HomeActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "HomeActivity";
+public class HomeActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+
+    private static final String TAG = "Home";
+    private Session.StatusCallback statusCallback = new SessionStatusCallback();
+    private ConnectionResult mConnectionResult;
+    private GoogleApiClient googleApiClient;
+    private ProgressDialog mConnectionProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-        googleApiClient.connect();
+        //googleApiClient.connect();
+        findViewById(R.id.plusButton).setOnClickListener(this);
+        findViewById(R.id.fbButton).setOnClickListener(this);
+        mConnectionProgressDialog = new ProgressDialog(this);
+        mConnectionProgressDialog.setMessage("Procesando...");
+
     }
 
 
@@ -65,6 +87,17 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
         }
     }
 
+    private void onClickLogin() {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+            if (!session.isOpened() && !session.isClosed()) {
+                session.openForRead(new Session.OpenRequest(this).setPermissions(Arrays.asList("public_profile")).setCallback(statusCallback));
+            } else {
+                Session.openActiveSession(this, true, statusCallback);
+            }
+        }
+    }
+
     @Override
     public void onConnectionSuspended(int i) {
 
@@ -72,11 +105,68 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
 
     @Override
     public void onConnected(Bundle bundle) {
+        mConnectionProgressDialog.dismiss();
+        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d(TAG, ""+connectionResult.getErrorCode());
+        try {
+            connectionResult.startResolutionForResult(this, ConnectionResult.SIGN_IN_REQUIRED);
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+            googleApiClient.connect();
+        }
+        mConnectionResult = connectionResult;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+
+//        if (resultCode == RESULT_OK) {
+//            mConnectionResult = null;
+//            googleApiClient.connect();
+//        }
+
+
+//        Set<String> keySet = data.getExtras().keySet();
+//        for (String key : keySet) {
+//            Log.d(TAG, String.format("%s = %s", key, data.getExtras().get(key)));
+//            Class aclass = data.getExtras().get(key).getClass();
+//
+//        }
+//        Log.d(TAG, data.toString());
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(isNetworkAvailable()) {
+            if (view.getId() == R.id.plusButton && !googleApiClient.isConnected()) {
+                if (mConnectionResult == null) {
+                    mConnectionProgressDialog.show();
+                } else {
+                    try {
+                        mConnectionResult.startResolutionForResult(this, CommonStatusCodes.SIGN_IN_REQUIRED);
+                    } catch (IntentSender.SendIntentException e) {
+                        // Intenta la conexión de nuevo.
+                        mConnectionResult = null;
+                        googleApiClient.connect();
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(this, "Debe estar conectado a internet", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isAvailable();
+    }
+
 }
