@@ -6,4 +6,8 @@
     <string name="facebook_app_id">669770743129288</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_home">Rutas Metropolitanas</string>
+    <string name="map_option">Ubicación mas cercana</string>
+    <string name="pay_option">Recarga Online</string>
+    <string name="time_option">Medidor de Tiempo</string>
+    <string name="exit_option">Salir</string>
 </resources>

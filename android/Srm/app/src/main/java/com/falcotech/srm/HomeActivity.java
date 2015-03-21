@@ -138,7 +138,7 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
 //
 //        }
 //        Log.d(TAG, data.toString());
-
+        startActivity(new Intent(this, MenuActivity.class));
     }
 
     @Override
