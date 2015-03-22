@@ -1,9 +1,166 @@
-1||2 de Mayo||Av. Alfonso Ugarte cdra 4 y 5 con Plaza Dos de Mayo, Cercado de Lima||metropilitano||Regular B,Expreso 4||
-2||28 de julio||Av. Paseo de la República cdra 61 con Puente Miraflores, Miraflores||metropilitano||Regular B,Regular C||
-3||Angamos||Av. Paseo de la República cdra 48 con Puente Angamos, San Isidro||metropilitano||Regular B,Regular C,Expreso 4||
-4||Aramburú||Av. Paseo de la República cdra 37 con Puente Aramburú, San Isidro||metropilitano||Regular B,Regular C||
-5||Balta||Av. República de Panamá (Bolognesi) cdra 10 con óvalo Balta, Barranco||metropilitano||Regular B,Regular C||
-6||Benavides||Av. Paseo de la República cdra 59 con Puente Benavides, Miraflores||metropilitano||Regular B,Regular C||
-7||Canadá||Av. Paseo de la República cdra 19 con Puente Canadá, Lince/La Victoria||metropilitano||Regular B,Regular C||
-8||Angamos||Av. Angamos cdra 48 este, Miraflores||corredorAzul||308,306||
-9||Barritos||Av. Angamos cdra 20 este, Surquillo||tren||B,C||
+1||Villa El Salvador||Av. Separadora Industrial / Av. Velasco Alvarado||Villa El Salvador||Metro de Lima||Regular||
+2||Parque Industrial||Av. Separadora Industrial / Av. El Sol||Villa El Salvador||Metro de Lima||Regular||
+3||Pumacahua||Av. La Unión / Pedro Ruiz Gallo / E. Aguirre||VM del Triunfo||Metro de Lima||Regular||
+4||Villa María||Av. Pachacútec / Av. Santa Rosa||VM del Triunfo||Metro de Lima||Regular||
+5||María Auxiliadora||Av. Pachacútec / Av. Manco Cápac||VM del Triunfo||Metro de Lima||Regular||
+6||San Juan||Los Héroes / Av. César Canevaro||SJ de Miraflores||Metro de Lima||Regular||
+7||Atocongo||Av. Los Héroes / Av. Buckingham||SJ de Miraflores||Metro de Lima||Regular||
+8||Jorge Chávez||Av. Tomás Marsano / Av. Jorge Chávez||Santiago de Surco||Metro de Lima||Regular||
+9||Ayacucho||Av. Tomás Marsano / Av. Ayacucho||Santiago de Surco||Metro de Lima||Regular||
+10||Cabitos||Av. Aviación / Óvalo Los Cabitos (Higuereta)||Santiago de Surco||Metro de Lima||Regular||
+11||Angamos||Av. Aviación / Av. Primavera||San Borja||Metro de Lima||Regular||
+12||San Borja Sur||Av. Aviación / Av. San Borja Sur||San Borja||Metro de Lima||Regular||
+13||La Cultura||Av. Aviación / Av. Javier Prado||San Borja||Metro de Lima||Regular||
+14||Arriola||Av. Aviación / Óvalo Arriola||La Victoria||Metro de Lima||Regular||
+15||Gamarra||Av. Aviación / Jirón Hipólito Unanue||La Victoria||Metro de Lima||Regular||
+16||Grau||Av. Grau / Nicolás Ayllón||Cercado de Lima||Metro de Lima||Regular||
+17||El Ángel||Av. Locumba Nro. S/N (Cementerio el Ángel)||El Agustino||Metro de Lima||Regular||
+18||Presbítero Maestro||Av. Locumba Nro. S/N (Cementerio Presbítero Maestro)||El Agustino||Metro de Lima||Regular||
+19||Caja de Agua||AV. Próceres de la Independencia / Óvalo Zárate||San Juan de Lurigancho||Metro de Lima||Regular||
+20||Pirámides del Sol||Av. Próceres de la Independencia / Av. Pirámides del Sol||San Juan de Lurigancho||Metro de Lima||Regular||
+21||Los Jardines||Av. Próceres de la Independencia / Av. Los Jardines||San Juan de Lurigancho||Metro de Lima||Regular||
+22||Los Postes||Av. Próceres de la Independencia / Av. Los Postes||San Juan de Lurigancho||Metro de Lima||Regular||
+23||San Carlos||Av. Próceres de la Independencia / Av. El Sol||San Juan de Lurigancho||Metro de Lima||Regular||
+24||San Martín||Av. Próceres de la Independencia / Av. Canto Rey||San Juan de Lurigancho||Metro de Lima||Regular||
+25||Santa Rosa||Av. Próceres de la Independencia / Av. Santa Rosa||San Juan de Lurigancho||Metro de Lima||Regular||
+26||Bayóvar||Av. Próceres de la Independencia / Av. Bayóvar||San Juan de Lurigancho||Metro de Lima||Regular||
+27||Plaza de Flores||Av. Paseo de la República / Via Expresa||Surco||Metropolitano||Super Expreso||
+28||Angamos||Av. Angamos / Via Expresa||Miraflores||Metropolitano||Super Expreso||
+29||Canaval y Moreyra||Av. Canaval y Moreyra / Via Expresa||San Isidro||Metropolitano||Super Expreso||
+30||Estacion Central||Av. Grau / Via Expresa||Lima||Metropolitano||Super Expreso||
+31||Naranjal||Av. Chincaysuyo / Via Expresa||Los Olivos||Metropolitano||Super Expreso||
+32||Naranjal||Av. Chincaysuyo / Via Expresa||Los Olivos||Metropolitano||Expreso 4||
+33||Izaguirre||Av. Elias Aguirre / Via Expresa||Los Olivos||Metropolitano||Expreso 4||
+34||Tomás Valle||Av. Tomas Valle / Via Expresa||Los Olivos||Metropolitano||Expreso 4||
+35||UNI||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 4||
+36||Caquetá||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 4||
+37||2 de Mayo||Av. 2 de Mayo / Via Expresa||Lima||Metropolitano||Expreso 4||
+38||España||Av. España / Via Expresa||Lima||Metropolitano||Expreso 4||
+39||Estacion Central||Av. Grau / Via Expresa||Lima||Metropolitano||Expreso 4||
+40||Javier Prado||Av. Javier Prado / Via Expresa||San Isidro||Metropolitano||Expreso 4||
+41||Canaval y Moreyra||Av. Canaval y Moreyra / Via Expresa||San Isidro||Metropolitano||Expreso 4||
+42||Angamos||Av. Angamos / Via Expresa||Miraflores||Metropolitano||Expreso 4||
+43||Plaza de Flores||Av. Paseo de la República / Via Expresa||Surco||Metropolitano||Expreso 4||
+44||Plaza de Flores||Av. Paseo de la República / Via Expresa||Surco||Metropolitano||Expreso 3||
+45||Benavides||Av. Benavides / Via Expresa||Miraflores||Metropolitano||Expreso 3||
+46||Angamos||Av. Angamos / Via Expresa||Miraflores||Metropolitano||Expreso 3||
+47||Aramburu||Av. Aramburu / Via Expresa||San Isidro||Metropolitano||Expreso 3||
+48||Canaval y Moreyra||Av. Canaval y Moreyra / Via Expresa||San Isidro||Metropolitano||Expreso 3||
+49||Javier Prado||Av. Javier Prado / Via Expresa||San Isidro||Metropolitano||Expreso 3||
+50||Canada||Av. Canada / Via Expresa||Lince||Metropolitano||Expreso 3||
+51||Estacion Central||Av. Estacion Central / Via Expresa||Lima||Metropolitano||Expreso 3||
+52||España||Av. España / Via Expresa||Lima||Metropolitano||Expreso 3||
+53||UNI||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 3||
+54||Independencia||Av. Independencia / Via Expresa||Los Olivos||Metropolitano||Expreso 3||
+55||Izaguirre||Av. Elias Aguirre / Via Expresa||Los Olivos||Metropolitano||Expreso 3||
+56||Naranjal||Av. Chincaysuyo / Via Expresa||Los Olivos||Metropolitano||Expreso 3||
+57||Plaza de Flores||Av. Paseo de la República / Via Expresa||Surco||Metropolitano||Expreso 2||
+58||Angamos||Av. Angamos / Via Expresa||Miraflores||Metropolitano||Expreso 2||
+59||Canaval y Moreyra||Av. Canaval y Moreyra / Via Expresa||San Isidro||Metropolitano||Expreso 2||
+60||Javier Prado||Av. Javier Prado / Via Expresa||San Isidro||Metropolitano||Expreso 2||
+61||Estacion Central||Av. Grau / Via Expresa||Lima||Metropolitano||Expreso 2||
+62||Caquetá||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 2||
+63||UNI||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 2||
+64||Tomás Valle||Av. Tomas Valle / Via Expresa||Lima||Metropolitano||Expreso 2||
+65||Naranjal||Av. Chincaysuyo / Via Expresa||Los Olivos||Metropolitano||Expreso 2||
+66||Matellini||Av. Matellini / Via Expresa||Chorrillos||Metropolitano||Expreso 1||
+67||Rosario de Villa||Av. Rosario de Villa / Via Expresa||Chorrillos||Metropolitano||Expreso 1||
+68||Teran||Av. Teran / Via Expresa||Chorrillos||Metropolitano||Expreso 1||
+69||Escuela Militar||Av. Escuela Militar / Via Expresa||Chorrillos||Metropolitano||Expreso 1||
+70||Estadio Union||Av. Estadio Union / Via Expresa||Surco||Metropolitano||Expreso 1||
+71||Bulevar||Av. Bulevar / Via Expresa||Surco||Metropolitano||Expreso 1||
+72||Balta||Av. Balta / Via Expresa||Miraflores||Metropolitano||Expreso 1||
+73||Angamos||Av. Angamos / Via Expresa||Miraflores||Metropolitano||Expreso 1||
+74||Canaval y Moreyra||Av. Canaval y Moreyra / Via Expresa||San Isidro||Metropolitano||Expreso 1||
+75||Javier Prado||Av. Javier Prado / Via Expresa||San Isidro||Metropolitano||Expreso 1||
+76||Estacion Central||Av. Grau / Via Expresa||Lima||Metropolitano||Expreso 1||
+77||España||Av. España / Via Expresa||Lima||Metropolitano||Expreso 1||
+78||Quilca||Av. Quilca / Via Expresa||Lima||Metropolitano||Expreso 1||
+79||2 de Mayo||Av. 2 de Mayo / Via Expresa||Lima||Metropolitano||Expreso 1||
+80||Caquetá||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 1||
+81||UNI||Av. Caquetá / Via Expresa||Lima||Metropolitano||Expreso 1||
+82||Naranjal||Av. Chincaysuyo / Via Expresa||Los Olivos||Metropolitano||Expreso 1||
+83||Amancaes||Av. Amancaes/ Av. Tacna||Rimac||Linea Azul||301||
+84||La Colonia||Av. La Colonia/ Av. Tacna||Lima||Linea Azul||301||
+85||Madrid||Av. Madrid/ Av. Tacna||Lima||Linea Azul||301||
+86||Leoncio Prado||Av. Leoncio Prado/ Av. Tacna||Lima||Linea Azul||301||
+87||Guardia Republicana||Av. Guardia Republicana/ Av. Tacna||Lima||Linea Azul||301||
+88||Chira||Av. Chira/ Av. Tacna||Lima||Linea Azul||301||
+89||Viru||Av. Viru/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+90||Ica||Av. Ica/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+91||Moquegua||Av. Moquegua/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+92||Ilo||Av. Ilo/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+93||Bolivia||Av. Bolivia/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+94||España||Av. España/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+95||Yauyos||Av. Yauyos/ Av. Gacilazo de La Vega||Lima||Linea Azul||301||
+96||Velarde||Av. Velarde/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+97||Saco Oliveros||Av. Saco Oliveros/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+98||R. Dagnino||Av. R. Dagnino/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+99||Cuba||Av. Cuba/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+100||E. Villar||Av. E. Villar/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+101||M. Segura||Av. M. Segura/ Av. Arequipa||Jesus Maria||Linea Azul||301||
+102||Tomas Guido||Av. Tomas Guido/ Av. Arequipa||Lince||Linea Azul||301||
+103||Casanova||Av. Casanova/ Av. Arequipa||Lince||Linea Azul||301||
+104||Olavide||Av. Olavide/ Av. Arequipa||Lince||Linea Azul||301||
+105||Juan de Arona||Av. Juan de Arona/ Av. Arequipa||Lince||Linea Azul||301||
+106||La Habana||Av. La Habana/ Av. Arequipa||Lince||Linea Azul||301||
+107||Aramburú||Av. Aramburú/ Av. Arequipa||San Isidro||Linea Azul||301||
+108||Rio de Janeiro||Av. Rio de Janeiro/ Av. Arequipa||San Isidro||Linea Azul||301||
+109||C. Tenaud||Av. C. Tenaud/ Av. Arequipa||San Isidro||Linea Azul||301||
+110||Ayacucho||Av. Ayacucho/ Av. Arequipa||San Isidro||Linea Azul||301||
+111||Angamos||Av. Angamos/ Av. Arequipa||Miraflores||Linea Azul||301||
+112||Piura||Av. Piura/ Av. Arequipa||Miraflores||Linea Azul||301||
+113||Ricardo Palma||Av. Ricardo Palma/ Av. Arequipa||Miraflores||Linea Azul||301||
+114||Schell||Av. Schell/ Av. Diagonal||Miraflores||Linea Azul||301||
+115||Benavides||Av. Benavides/ Av. Diagonal||Miraflores||Linea Azul||301||
+116||28 de Julio||Av. 28 de Julio/ Av. Diagonal||Miraflores||Linea Azul||301||
+117||Fanning||Av. Fanning||Miraflores||Linea Azul||301||
+118||N. Balboa||Av. N. Balboa||Miraflores||Linea Azul||301||
+119||Acacias||Av. Acacias||Miraflores||Linea Azul||301||
+120||Chipoco||Av. Chipoco||Surco||Linea Azul||301||
+121||El Sol||Av. El Sol||Surco||Linea Azul||301||
+122||Amancaes||Av. Amancaes||Lima||Linea Azul||302||
+123||La Colonia||Av. La Colonia||Lima||Linea Azul||302||
+124||Madrid||Av. Madrid||Lima||Linea Azul||302||
+125||Leoncio Prado||Av. Leoncio Prado||Lima||Linea Azul||302||
+126||Guardia Republicana||Av. Guardia Republicana/ Av. Tacna||Lima||Linea Azul||302||
+127||Chira||Av. Chira/ Av. Tacna||Lima||Linea Azul||302||
+128||Viru||Av. Viru/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+129||Ica||Av. Ica/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+130||Moquegua||Av. Moquegua/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+131||Ilo||Av. Ilo/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+132||Bolivia||Av. Bolivia/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+133||España||Av. España/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+134||Yauyos||Av. Yauyos/ Av. Gacilazo de La Vega||Lima||Linea Azul||302||
+135||Velarde||Av. Velarde/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+136||Saco Oliveros||Av. Saco Oliveros/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+137||R. Dagnino||Av. R. Dagnino/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+138||Cuba||Av. Cuba/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+139||E. Villar||Av. E. Villar/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+140||M. Segura||Av. M. Segura/ Av. Arequipa||Jesus Maria||Linea Azul||302||
+141||Tomas Guido||Av. Tomas Guido/ Av. Arequipa||Lince||Linea Azul||302||
+142||Casanova||Av. Casanova/ Av. Arequipa||Lince||Linea Azul||302||
+143||Olavide||Av. Olavide/ Av. Arequipa||Lince||Linea Azul||302||
+144||Juan de Arona||Av. Juan de Arona/ Av. Arequipa||Lince||Linea Azul||302||
+145||La Habana||Av. La Habana/ Av. Arequipa||Lince||Linea Azul||302||
+146||Aramburú||Av. Aramburú/ Av. Arequipa||San Isidro||Linea Azul||302||
+147||Rio de Janeiro||Av. Rio de Janeiro/ Av. Arequipa||San Isidro||Linea Azul||302||
+148||C. Tenaud||Av. C. Tenaud/ Av. Arequipa||San Isidro||Linea Azul||302||
+149||Ayacucho||Av. Ayacucho/ Av. Arequipa||San Isidro||Linea Azul||302||
+150||Angamos||Av. Angamos/ Av. Arequipa||Miraflores||Linea Azul||302||
+151||Piura||Av. Piura/ Av. Arequipa||Miraflores||Linea Azul||302||
+152||Viru||Av. Viru/ Av. Arequipa||Lima||Linea Azul||303||
+153||Ica||Av. Ica/ Av. Arequipa||Lima||Linea Azul||303||
+154||Moquegua||Av. Moquegua/ Av. Arequipa||Lima||Linea Azul||303||
+155||Uruguay||Av. Uruguay/ Av. Arequipa||Lima||Linea Azul||303||
+156||Bolivia||Av. Bolivia/ Av. Arequipa||Lima||Linea Azul||303||
+157||Velarde||Av. Velarde/ Av. Arequipa||Lima||Linea Azul||303||
+158||Saco Oliveros||Av. Saco Oliveros/ Av. Arequipa||Jesus Maria||Linea Azul||303||
+159||Cuba||Av. Cuba/ Av. Arequipa||Jesus Maria||Linea Azul||303||
+160||M. Segura||Av. M. Segura/ Av. Arequipa||Jesus Maria||Linea Azul||303||
+161||B. Alcedo||Av. B. Alcedo/ Av. Arequipa||Lince||Linea Azul||303||
+162||Casanova||Av. Casanova/ Av. Arequipa||San Isidro||Linea Azul||303||
+163||Olavide||Av. Olavide/ Av. Arequipa||San Isidro||Linea Azul||303||
+164||Aramburu||Av. Aramburu/ Av. Arequipa||San Isidro||Linea Azul||303||
+165||Angamos||Av. Angamos/ Av. Arequipa||Miraflores||Linea Azul||303||
+
