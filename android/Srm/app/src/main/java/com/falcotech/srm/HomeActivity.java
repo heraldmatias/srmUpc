@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.Session;
@@ -45,7 +46,8 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .build();
         //googleApiClient.connect();
-        findViewById(R.id.plusButton).setOnClickListener(this);
+        com.google.android.gms.common.SignInButton b = (com.google.android.gms.common.SignInButton) findViewById(R.id.plusButton);
+        b.setOnClickListener(this);
         findViewById(R.id.fbButton).setOnClickListener(this);
         mConnectionProgressDialog = new ProgressDialog(this);
         mConnectionProgressDialog.setMessage("Procesando...");
@@ -138,6 +140,7 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
 //
 //        }
 //        Log.d(TAG, data.toString());
+        Log.d(TAG,"Registrar id del dispositivo");
         startActivity(new Intent(this, MenuActivity.class));
     }
 

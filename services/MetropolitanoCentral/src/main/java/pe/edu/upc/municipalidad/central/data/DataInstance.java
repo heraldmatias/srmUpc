@@ -89,7 +89,7 @@ public class DataInstance {
 
 	private Map<Long, Estacion> transforTextoEstacion(StringBuffer info) {
 		StringTokenizer tokens = new StringTokenizer(info.toString(),
-				properties.getValue("toke.dato"));
+				properties.getValue("toke.dato")), subitems = null ;
 		Map<Long, Estacion> lista = new HashMap<Long, Estacion>();
 		Estacion estacion = null;
 		String dtTemmp = null;
@@ -108,6 +108,9 @@ public class DataInstance {
 			estacion.setTipoServicio(dtTemmp);
 			dtTemmp = tokens.nextElement().toString().trim();
 			estacion.setSubServicios(dtTemmp);
+			dtTemmp = tokens.nextElement().toString().trim();
+			estacion.setSubServicios(dtTemmp);
+			
 			lista.put(estacion.getId(), estacion);
 		}
 		return lista;

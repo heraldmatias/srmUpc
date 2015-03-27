@@ -1,16 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".HomeActivity"
-    android:orientation="vertical">
-
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:fb="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HomeActivity"
+        android:background="#ff24b7ff">
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff85ffff"
+        android:clickable="false"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:padding="15dp"
+        android:transitionGroup="false">
 
         <ImageView
             android:id="@+id/widget45"
@@ -46,6 +52,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="27dp"
             android:layout_alignParentTop="true"
+            fb:login_text="Facebook"
+            fb:logout_text="Logout"
             android:layout_centerHorizontal="true" />
 
         <com.google.android.gms.common.SignInButton
