@@ -97,7 +97,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
         if (mLastLocation != null) {
             latLngCurrent = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             Log.d(TAG, "Capture LatLng: " + latLngCurrent.toString());
-            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.location);
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.marker_rounded_light_blue);
             update = CameraUpdateFactory.newLatLngZoom(latLngCurrent, 17);
             map.animateCamera(update);
             map.addMarker(new MarkerOptions().position(latLngCurrent).icon(icon));
