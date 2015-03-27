@@ -10,4 +10,9 @@
     <string name="pay_option">Recarga Online</string>
     <string name="time_option">Medidor de Tiempo</string>
     <string name="exit_option">Salir</string>
+    <string name="internet_disconnected_error">Debe estar conectado a internet</string>
+    <string name="authorize_error">Debe ingresar con su cuenta de Facebook o Google+</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="label_service_type">Servicio de Transporte</string>
+    <string name="prompt_service_type">Seleccione Servicio</string>
 </resources>

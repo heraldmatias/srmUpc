@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="service_type_array">
+        <item>Metropolitano</item>
+        <item>Corredor Azul</item>
+        <item>Línea Amarilla</item>
+        <item>Tren eléctrico</item>
+    </string-array>
+</resources>

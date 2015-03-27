@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.Session;
@@ -21,7 +20,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
-
+import com.google.android.gms.maps.MapFragment;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -39,7 +38,6 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getActionBar().hide();
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
@@ -47,8 +45,7 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this)
                 .build();
         //googleApiClient.connect();
-        com.google.android.gms.common.SignInButton b = (com.google.android.gms.common.SignInButton) findViewById(R.id.plusButton);
-        b.setOnClickListener(this);
+        findViewById(R.id.plusButton).setOnClickListener(this);
         findViewById(R.id.fbButton).setOnClickListener(this);
         mConnectionProgressDialog = new ProgressDialog(this);
         mConnectionProgressDialog.setMessage("Procesando...");
@@ -127,22 +124,28 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
+        boolean authorizeUser = false;
+        if (resultCode == RESULT_OK) {
+            if(requestCode == 64206) {
+                authorizeUser = fbAuth();
+            } else if(requestCode == 4) {
+                authorizeUser = plusAuth();
+            }
+        }
 
-//        if (resultCode == RESULT_OK) {
-//            mConnectionResult = null;
-//            googleApiClient.connect();
-//        }
+        if(authorizeUser) {
+            startActivity(new Intent(this, MenuActivity.class));
+        } else {
+            Toast.makeText(this, getString(R.string.authorize_error), Toast.LENGTH_LONG).show();
+        }
+    }
 
+    private boolean plusAuth() {
+        return true;
+    }
 
-//        Set<String> keySet = data.getExtras().keySet();
-//        for (String key : keySet) {
-//            Log.d(TAG, String.format("%s = %s", key, data.getExtras().get(key)));
-//            Class aclass = data.getExtras().get(key).getClass();
-//
-//        }
-//        Log.d(TAG, data.toString());
-        Log.d(TAG,"Registrar id del dispositivo");
-        startActivity(new Intent(this, MenuActivity.class));
+    private boolean fbAuth() {
+        return true;
     }
 
     @Override
@@ -151,6 +154,7 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
             if (view.getId() == R.id.plusButton && !googleApiClient.isConnected()) {
                 if (mConnectionResult == null) {
                     mConnectionProgressDialog.show();
+                    googleApiClient.connect();
                 } else {
                     try {
                         mConnectionResult.startResolutionForResult(this, CommonStatusCodes.SIGN_IN_REQUIRED);
@@ -160,9 +164,11 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
                         googleApiClient.connect();
                     }
                 }
+            } else if (view.getId() == R.id.fbButton) {
+                onClickLogin();
             }
         } else {
-            Toast.makeText(this, "Debe estar conectado a internet", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.internet_disconnected_error), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -1,18 +1,35 @@
 package com.falcotech.srm;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 
-public class MenuActivity extends ActionBarActivity {
+public class MenuActivity extends ActionBarActivity implements View.OnClickListener {
+
+    ImageButton btnPay;
+    ImageButton btnTime;
+    ImageButton btnMap;
+    ImageButton btnExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        getActionBar().hide();
+        btnPay = (ImageButton) findViewById(R.id.btnPago);
+        btnMap = (ImageButton) findViewById(R.id.btnMapa);
+        btnTime = (ImageButton) findViewById(R.id.btnTiempo);
+        btnExit = (ImageButton) findViewById(R.id.btnSalir);
+
+        btnExit.setOnClickListener(this);
+        btnPay.setOnClickListener(this);
+        btnTime.setOnClickListener(this);
+        btnMap.setOnClickListener(this);
+        //getActionBar().hide();
     }
 
 
@@ -36,5 +53,13 @@ public class MenuActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnMapa:
+                startActivity(new Intent(this, MapActivity.class));
+        }
     }
 }
