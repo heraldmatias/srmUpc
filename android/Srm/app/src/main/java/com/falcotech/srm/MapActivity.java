@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.LoginFilter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +16,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -22,9 +25,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends ActionBarActivity implements LocationListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
-    LocationRequest mLocationRequest;
-    //LocationClient mLocationClient;
+    public static final String TAG = "MapActivity";
 
+    LocationRequest mLocationRequest;
     boolean mUpdatesRequested;
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap map;
@@ -39,6 +42,8 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         buildGoogleApiClient();
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+                .getMap();
     }
 
 
@@ -70,6 +75,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+        mGoogleApiClient.connect();
     }
 
     @Override
@@ -87,13 +93,16 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
         CameraUpdate update = null;
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
+        Log.i(TAG, "Connection succesfully");
         if (mLastLocation != null) {
             latLngCurrent = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-
+            Log.d(TAG, "Capture LatLng: " + latLngCurrent.toString());
             BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.location);
             update = CameraUpdateFactory.newLatLngZoom(latLngCurrent, 17);
             map.animateCamera(update);
             map.addMarker(new MarkerOptions().position(latLngCurrent).icon(icon));
+        } else {
+            Log.d(TAG, "Error capturing current location");
         }
     }
 
