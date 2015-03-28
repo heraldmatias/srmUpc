@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 
@@ -16,10 +17,14 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
     ImageButton btnMap;
     ImageButton btnExit;
 
+    private ImageButton btnPago,btnTiempo,btnSalir;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
         btnPay = (ImageButton) findViewById(R.id.btnPago);
         btnMap = (ImageButton) findViewById(R.id.btnMapa);
         btnTime = (ImageButton) findViewById(R.id.btnTiempo);
@@ -30,36 +35,50 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
         btnTime.setOnClickListener(this);
         btnMap.setOnClickListener(this);
         //getActionBar().hide();
+        btnPago = (ImageButton) findViewById(R.id.btnPago);
+        btnTiempo = (ImageButton) findViewById(R.id.btnTiempo);
+        btnSalir = (ImageButton) findViewById(R.id.btnSalir);
+
+        btnPago.setOnClickListener(this);
+        btnMap.setOnClickListener(this);
+        btnTiempo.setOnClickListener(this);
+        btnSalir.setOnClickListener(this);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
+                case R.id.btnPago:
+                    startActivity(new Intent(this, PagoActivity.class));
+                    break;
             case R.id.btnMapa:
                 startActivity(new Intent(this, MapActivity.class));
+                    break;
+                case R.id.btnTiempo:
+                    startActivity(new Intent(this, Tiempo.class));
+                    break;
+                case R.id.btnSalir:
+                    // i'm lazy, do nothing
+                    break;
+            }
         }
     }
-}
+

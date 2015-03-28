@@ -12,8 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
-
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.google.android.gms.common.ConnectionResult;
@@ -38,6 +39,16 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+       /* getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        System.out.println(getActionBar());
+        if(getActionBar()!=null){
+            getActionBar().hide();
+        }
+        System.out.println(getSupportActionBar());
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }*/
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)

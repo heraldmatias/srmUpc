@@ -10,9 +10,50 @@
     <string name="pay_option">Recarga Online</string>
     <string name="time_option">Medidor de Tiempo</string>
     <string name="exit_option">Salir</string>
+
     <string name="internet_disconnected_error">Debe estar conectado a internet</string>
     <string name="authorize_error">Debe ingresar con su cuenta de Facebook o Google+</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="label_service_type">Servicio de Transporte</string>
     <string name="prompt_service_type">Seleccione Servicio</string>
+
+
+    <string name="title_activity_pago">PagoActivity</string>
+
+    <string-array name="servicioTransporte">
+        <item>Seleccione</item>
+        <item>Metropolitano</item>
+        <item>Metro de Lima</item>
+    </string-array>
+
+    <string-array name="bancos">
+        <item>Seleccione</item>
+        <item>PAYPAL</item>
+    </string-array>
+
+
+    <string-array name="meses">
+        <item>Seleccione</item>
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+    </string-array>
+
+
+    <string-array name="annos">
+        <item>Seleccione</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+    </string-array>
+
+    <string name="title_activity_ubica">Ubica</string>
+
+
+    <string name="title_activity_tiempo">Tiempo</string>
+
+
+
+    <string name="title_activity_mensaje">Mensaje</string>
+
 </resources>
