@@ -123,6 +123,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+    	<finalName>SimuladorMunicipalidad</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
