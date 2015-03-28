@@ -191,24 +191,23 @@
                 android:hint="Número de Tarjeta"  />
 
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/dateMes"
+                    android:layout_row="7"
+                    android:layout_column="1" />
+
+
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_row="7"
-                android:layout_column="1">
+                android:id="@+id/dateAnno"
+                android:layout_row="8"
+                android:layout_column="1"  />
 
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/dateMes" />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/dateAnno" />
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,7 +230,7 @@
                 android:id="@+id/btnRecarga"
                 android:layout_row="10"
                 android:layout_column="0"
-                android:layout_marginLeft="35dip"
+                android:layout_marginLeft="30dip"
                 android:layout_marginRight="15dip" />
 
 
@@ -243,7 +242,7 @@
                 android:layout_row="10"
                 android:layout_column="1"
                 android:layout_marginLeft="15dip"
-                android:layout_marginRight="35dip" />
+                android:layout_marginRight="30dip" />
 
         </GridLayout>
 
