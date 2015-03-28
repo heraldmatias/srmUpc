@@ -135,14 +135,14 @@ public class HomeActivity extends ActionBarActivity implements GoogleApiClient.C
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
-        boolean authorizeUser = true; // debe ser false
-       /* if (resultCode == RESULT_OK) {
+        boolean authorizeUser = false;
+        if (resultCode == RESULT_OK) {
             if(requestCode == 64206) {
                 authorizeUser = fbAuth();
             } else if(requestCode == 4) {
                 authorizeUser = plusAuth();
             }
-        }*/
+        }
 
         if(authorizeUser) {
             startActivity(new Intent(this, MenuActivity.class));

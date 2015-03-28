@@ -15,7 +15,8 @@
         android:textAlignment="center"
         android:layout_marginTop="5dp"
         android:padding="15dp"
-        android:transitionGroup="false">
+        android:transitionGroup="false"
+        android:id="@+id/relativeLayout2">
 
         <ImageView
             android:id="@+id/widget45"
@@ -33,5 +34,97 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+            <GridLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativeLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="100dp"
+                android:columnCount="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_service_type"
+                    android:id="@+id/textView9"
+                    android:layout_centerHorizontal="true"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:padding="5dp"
+                    android:textColor="#ff070707" />
+
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spServiceType"
+                    android:layout_centerVertical="true"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_toRightOf="@+id/txtServiceType"
+                    android:layout_toEndOf="@+id/txtServiceType"
+                    android:prompt="@string/prompt_service_type"
+                    android:entries="@array/service_type_array"
+                    android:spinnerMode="dialog" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Punto Inicio"
+                    android:id="@+id/textView1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:padding="5dp"
+                    android:textColor="#ff070707" />
+
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spPuntoInicio"
+                    android:layout_centerVertical="true"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:spinnerMode="dialog" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Punto Destino"
+                    android:id="@+id/textView13"
+                    android:layout_centerHorizontal="true"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:padding="5dp"
+                    android:textColor="#ff070707" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spPuntoDestino"
+                    android:layout_centerVertical="true"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:spinnerMode="dialog" />
+            </GridLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </RelativeLayout>
