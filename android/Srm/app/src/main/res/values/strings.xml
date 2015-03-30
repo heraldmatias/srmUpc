@@ -16,7 +16,9 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="label_service_type">Servicio de Transporte</string>
     <string name="prompt_service_type">Seleccione Servicio</string>
-
+    <string name="prompt_locations_update">Buscando estaciones en línea</string>
+    <string name="title_locations_update">Espere por favor, esta operación puede tardar algunos segundos</string>
+    <string name="data_locations_update">No se encontraron estaciones para el servicio seleccionado</string>
 
     <string name="title_activity_pago">PagoActivity</string>
 

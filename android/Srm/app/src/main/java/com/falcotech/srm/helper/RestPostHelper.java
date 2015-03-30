@@ -12,6 +12,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,9 +47,13 @@ public class RestPostHelper {
         }
     }
 
-    private static synchronized String run(String URL, HashMap<String, Object> parameters) throws ApiException {
+    public static synchronized String run(String URL, HashMap<String, Object> parameters) throws ApiException {
+        HttpParams my_httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(my_httpParams, 3000);
+        HttpConnectionParams.setSoTimeout(my_httpParams, 1);
+
         String strResponse = null;
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = new DefaultHttpClient(my_httpParams);
         HttpPost request = new HttpPost(URL);
         Log.d(TAG, "va leer url");
         try {
@@ -84,23 +91,13 @@ public class RestPostHelper {
         return strResponse;
     }
 
-    public static synchronized JSONArray getJsonArray(String URL) throws JSONException, ApiException {
-        return getJsonArray(URL, null);
-    }
-
-    public static synchronized JSONArray getJsonArray(String URL, HashMap<String, Object> parameters) throws JSONException, ApiException {
-        String response = run(URL, parameters);
+    public static synchronized JSONArray getJsonArray(String response) throws JSONException {
         JSONArray jsonArray = new JSONArray(response);
         return jsonArray;
     }
 
-    public static synchronized JSONObject getJsonObject(String URL, HashMap<String, Object> parameters) throws JSONException, ApiException {
-        String response = run(URL, parameters);
+    public static synchronized JSONObject getJsonObject(String response) throws JSONException{
         JSONObject jsonObject = new JSONObject(response);
         return jsonObject;
-    }
-
-    public static synchronized JSONObject getJsonObject(String URL) throws JSONException, ApiException {
-        return getJsonObject(URL, null);
     }
 }
