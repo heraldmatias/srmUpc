@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 
@@ -73,7 +72,7 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(new Intent(this, MapActivity.class));
                     break;
                 case R.id.btnTiempo:
-                    startActivity(new Intent(this, Tiempo.class));
+                    startActivity(new Intent(this, TiempoActivity.class));
                     break;
                 case R.id.btnSalir:
                     // i'm lazy, do nothing

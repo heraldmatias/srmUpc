@@ -57,15 +57,15 @@
             android:label="@string/title_activity_pago" >
         </activity>
         <activity
-            android:name=".Ubica"
+            android:name=".UbicaActivity"
             android:label="@string/title_activity_ubica" >
         </activity>
         <activity
-            android:name=".Tiempo"
+            android:name=".TiempoActivity"
             android:label="@string/title_activity_tiempo" >
         </activity>
         <activity
-            android:name=".Mensaje"
+            android:name=".MensajeActivity"
             android:label="@string/title_activity_mensaje" >
         </activity>
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.falcotech.srm.Mensaje"
+    tools:context="com.falcotech.srm.MensajeActivity"
     android:baselineAligned="true"
     android:background="#ff24b7ff">
 

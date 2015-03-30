@@ -103,7 +103,7 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
         if(v!=null){
             switch (v.getId()){
                 case R.id.btnRecarga:
-                    startActivity(new Intent(this, Mensaje.class));
+                    startActivity(new Intent(this, MensajeActivity.class));
                     break;
                 case R.id.btnCancelar:
                     startActivity(new Intent(this, MenuActivity.class));
