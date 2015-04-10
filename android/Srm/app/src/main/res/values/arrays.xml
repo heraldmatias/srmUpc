@@ -3,8 +3,7 @@
     <string-array name="service_type_array">
         <item>Seleccione</item>
         <item>Metropolitano</item>
-        <item>Corredor Azul</item>
-        <item>Línea Amarilla</item>
-        <item>Tren eléctrico</item>
+        <item>Metro de Lima</item>
+        <item>Linea Azul</item>
     </string-array>
 </resources>

@@ -1,17 +1,25 @@
 package com.falcotech.srm;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
-public class MensajeActivity extends ActionBarActivity {
+public class MensajeActivity extends ActionBarActivity implements View.OnClickListener {
+
+    Button btnConfirmPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mensaje);
+
+        btnConfirmPayment = (Button) findViewById(R.id.btnConfirmPayment);
+        btnConfirmPayment.setOnClickListener(this);
     }
 
     @Override
@@ -34,5 +42,10 @@ public class MensajeActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(this, MenuActivity.class));
     }
 }

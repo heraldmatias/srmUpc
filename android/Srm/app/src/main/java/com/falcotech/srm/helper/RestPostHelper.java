@@ -9,6 +9,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -64,6 +65,45 @@ public class RestPostHelper {
                 }
                 request.setEntity(new UrlEncodedFormEntity(params));
             }
+            HttpResponse response = client.execute(request);
+            StatusLine status = response.getStatusLine();
+            if (status.getStatusCode() != HTTP_STATUS_OK) {
+                throw new ApiException("HTTP ERROR " + status.getStatusCode());
+            }
+            Log.d(TAG, "CONNECT TO REMOTE HOST SUCCESSFULLY");
+            HttpEntity entity = response.getEntity();
+            InputStream ist = entity.getContent();
+            ByteArrayOutputStream content = new ByteArrayOutputStream();
+            Log.d(TAG, "READ JSON RESPONSE SUCCESSFULLY");
+            int readCount = 0;
+            while ((readCount = ist.read(buff)) != -1) {
+                content.write(buff, 0, readCount);
+            }
+            strResponse = new String(content.toByteArray());
+            Log.d(TAG, "JSON RESPONSE : " + strResponse);
+        } catch (ClientProtocolException e) {
+            Log.e(TAG, "ERROR CONNECTING TO REMOTE HOST : " + e.getMessage());
+            throw new ApiException("Ocurrio un error al conectar al servidor" + e.getMessage(), e);
+        } catch (IOException e) {
+            Log.e(TAG, "ERROR READING RESPONSE DATA : " + e.getMessage());
+            throw new ApiException("Ocurrio un error al conectar al servidor" + e.getMessage(), e);
+        }
+
+        return strResponse;
+    }
+
+    public static synchronized String runGet(String URL) throws ApiException {
+        //HttpParams my_httpParams = new BasicHttpParams();
+        //HttpConnectionParams.setConnectionTimeout(my_httpParams, 3000);
+        //HttpConnectionParams.setSoTimeout(my_httpParams, 1);
+
+        String strResponse = null;
+//        HttpClient client = new DefaultHttpClient(my_httpParams);
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet(URL);
+        Log.d(TAG, "Reading URL: " + URL);
+        try {
+
             HttpResponse response = client.execute(request);
             StatusLine status = response.getStatusLine();
             if (status.getStatusCode() != HTTP_STATUS_OK) {

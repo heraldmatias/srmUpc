@@ -2,254 +2,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.falcotech.srm.PagoActivity"
+    android:background="#ff24b7ff"
     android:baselineAligned="true"
-    android:background="#ff24b7ff">
+    android:orientation="vertical"
+    tools:context="com.falcotech.srm.PagoActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="#ff85ffff"
         android:clickable="false"
-        android:textAlignment="center"
-        android:layout_marginTop="5dp"
         android:padding="15dp"
-        android:transitionGroup="false"
-        android:id="@+id/relativeLayout">
+        android:textAlignment="center"
+        android:transitionGroup="false">
 
         <ImageView
             android:id="@+id/widget45"
             android:layout_width="@dimen/abc_action_button_min_width_material"
             android:layout_height="@dimen/abc_action_bar_stacked_max_height"
-            android:src="@drawable/location"
-            />
+            android:src="@drawable/location" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/title_activity_home"
-            android:id="@+id/textView"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:text="@string/title_activity_home"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:gravity="center_horizontal">
-        <GridLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/relativeLayout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="100dp"
-            android:columnCount="2">
 
-            <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <GridLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Servicio Transporte"
-                android:id="@+id/textView2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/relativeLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:padding="5dp"
-                android:textColor="#ff070707" />
+                android:layout_marginTop="100dp"
+                android:columnCount="2">
 
-
-            <Spinner
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spServicio"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:spinnerMode="dialog"
-                android:layout_gravity="right" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Banco"
-                android:id="@+id/textView3"
-                android:layout_below="@+id/relativeLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:padding="5dp"
-                android:textColor="#ff070707" />
-
-
-            <Spinner
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spBanco"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:spinnerMode="dialog"
-                android:layout_gravity="right" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Cuenta"
-                android:id="@+id/textView4"
-                android:layout_below="@+id/relativeLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:padding="5dp"
-                android:textColor="#ff070707" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Monto S/."
-                android:id="@+id/textView5"
-                android:layout_row="5"
-                android:padding="5dp"
-                android:textColor="#ff070707"
-                android:layout_column="0" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/TxtNumeroCuenta"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:hint="Número de Cuenta" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
-                android:hint="Cod. Verificación"
-                android:id="@+id/textView6"
-                android:layout_row="6"
-                android:padding="5dp"
-                android:textColor="#ff070707"
-                android:layout_column="0" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/txtMonto"
-                android:layout_row="5"
-                android:layout_column="1"
-                android:text=""
-                android:hint="Monto a Cargar" />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/txtCodVer"
-                android:layout_row="6"
-                android:layout_column="1"
-                android:text=""
-                android:hint="Cod. Verificación" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Fec. Vencimiento"
-                android:id="@+id/textView7"
-                android:layout_row="7"
-                android:padding="5dp"
-                android:textColor="#ff070707"
-                android:layout_column="0" />
-
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/txtNumeroTarjeTransporte"
-                android:layout_row="9"
-                android:layout_column="1"
-                android:text=""
-                android:hint="Número de Tarjeta"  />
-
-
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:padding="5dp"
+                    android:text="Servicio Transporte"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ff070707" />
 
 
                 <Spinner
+                    android:id="@+id/spServicio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="right"
+                    android:layout_row="0"
+                    android:spinnerMode="dialog" />
+
+
+                <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/dateMes"
-                    android:layout_row="7"
-                    android:layout_column="1" />
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="5"
+                    android:padding="5dp"
+                    android:text="@string/label_price"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ff070707" />
+
+                <EditText
+                    android:id="@+id/txtMonto"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="5"
+                    android:ems="10"
+                    android:hint="@string/hint_price"
+                    android:inputType="number"
+                    android:text="" />
 
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/dateAnno"
-                android:layout_row="8"
-                android:layout_column="1"  />
+                <EditText
+                    android:id="@+id/txtNumeroTarjeTransporte"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="9"
+                    android:ems="10"
+                    android:hint="@string/hint_card_number"
+                    android:inputType="number"
+                    android:text="" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Tarjeta Transporte"
-                android:id="@+id/textView8"
-                android:layout_row="9"
-                android:padding="5dp"
-                android:textColor="#ff070707"
-                android:layout_column="0" />
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="9"
+                    android:padding="5dp"
+                    android:text="@string/label_card_service"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#ff070707" />
 
 
+                <Button
+                    android:id="@+id/btnRecarga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_marginLeft="30dip"
+                    android:layout_marginRight="15dip"
+                    android:layout_row="10"
+                    android:text="@string/action_pay" />
 
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recargar Tarjeta"
-                android:id="@+id/btnRecarga"
-                android:layout_row="10"
-                android:layout_column="0"
-                android:layout_marginLeft="30dip"
-                android:layout_marginRight="15dip" />
+                <Button
+                    android:id="@+id/btnCancelar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="30dip"
+                    android:layout_row="10"
+                    android:text="@string/action_pay_cancel" />
 
+            </GridLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancelar Recarga"
-                android:id="@+id/btnCancelar"
-                android:layout_row="10"
-                android:layout_column="1"
-                android:layout_marginLeft="15dip"
-                android:layout_marginRight="30dip" />
-
-        </GridLayout>
-
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
-
-
 
 
 </RelativeLayout>

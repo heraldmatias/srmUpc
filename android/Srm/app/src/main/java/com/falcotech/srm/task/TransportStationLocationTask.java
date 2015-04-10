@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class TransportStationLocationTask extends AsyncTask<String, Integer, String> {
 
     public static final String TAG = "StationLocationTask";
-    public static final String API_URL = "http://colibricomunicaciones.com:8080/SRMCentral/Estaciones/?tipoServicio=";
+    public static final String API_URL = "http://colibricomunicaciones.com/SRMCentral/Estaciones/?tipoServicio=";
 
     private ProgressDialog progressDialog;
 
@@ -44,7 +44,7 @@ public class TransportStationLocationTask extends AsyncTask<String, Integer, Str
     protected String doInBackground(String... params) {
         String response = null;
         try {
-            response = RestPostHelper.run(API_URL + params[0], null);
+            response = RestPostHelper.runGet(API_URL + params[0]);
         } catch (RestPostHelper.ApiException e) {
             e.printStackTrace();
         }
@@ -59,10 +59,30 @@ public class TransportStationLocationTask extends AsyncTask<String, Integer, Str
         } else {
             try {
                 JSONArray jsonArray = RestPostHelper.getJsonArray(result);
+                LatLng latLng = null;
+                MapActivity.map.clear();
                 for (int index = 0; index < jsonArray.length(); index++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(index);
-                    MapActivity.addMarkMap(new LatLng(Double.parseDouble(jsonObject.getString("d")), Double.parseDouble(jsonObject.getString("dd"))), R.drawable.marker_rounded_red);
+
+                    if (!jsonObject.isNull("ubicacion")) {
+                        JSONObject location = jsonObject.getJSONObject("ubicacion");
+                        String name = null;
+                        String address = null;
+                        if (jsonObject.has("nombre")) {
+                            name = jsonObject.optString("nombre", null);
+                        }
+                        if (jsonObject.has("direccion")) {
+                            address = jsonObject.optString("direccion", null);
+                        }
+                        if ((location.has("latitud") & !location.isNull("latitud")) && (location.has("longitud") & !location.isNull("longitud"))) {
+                            latLng = new LatLng(Double.parseDouble(location.getString("longitud")), Double.parseDouble(location.getString("latitud")));
+                            MapActivity.addMarkMap(latLng, name, address, R.drawable.marker_rounded_red);
+                            MapActivity.setNearestLocation(latLng, name, address);
+                        }
+                    }
+                    //break;
                 }
+                MapActivity.addNearestLatLngMarkMap();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

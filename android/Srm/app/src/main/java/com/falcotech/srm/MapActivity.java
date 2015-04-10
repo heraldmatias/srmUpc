@@ -27,7 +27,10 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.net.URLEncoder;
 
 public class MapActivity extends ActionBarActivity implements LocationListener, GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, AdapterView.OnItemSelectedListener {
@@ -37,12 +40,13 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
     LocationRequest mLocationRequest;
     boolean mUpdatesRequested;
     private GoogleApiClient mGoogleApiClient;
-    private static GoogleMap map;
+    public static GoogleMap map;
     private Location mLastLocation;
-    private LatLng latLngOrigin;
+    private static LatLng latLngNearest;
+    private static String latLngNearestTitle;
+    private static String latLngNearestSnippet;
     private LatLng latLngCurrent;
-    SharedPreferences mPrefs;
-    SharedPreferences.Editor mEditor;
+    private static float distanceTo = Float.MAX_VALUE;
 
     Spinner spServiceType;
     public static Context staticThis;
@@ -55,6 +59,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
         buildGoogleApiClient();
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
                 .getMap();
+        map.setMyLocationEnabled(true);
         spServiceType = (Spinner) findViewById(R.id.spServiceType);
         spServiceType.setOnItemSelectedListener(this);
         staticThis = this.getApplicationContext();
@@ -96,7 +101,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
     @Override
     public void onLocationChanged(Location location) {
         latLngCurrent = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        addMarkMap(latLngCurrent, R.drawable.marker_rounded_light_blue, Boolean.TRUE);
+        addMarkMap(latLngCurrent, R.drawable.marker_rounded_light_blue, null, null, Boolean.TRUE);
     }
 
     @Override
@@ -112,7 +117,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
         Log.i(TAG, "Connection successfully");
         if (mLastLocation != null) {
             latLngCurrent = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            addMarkMap(latLngCurrent, R.drawable.marker_rounded_light_blue, Boolean.TRUE);
+            addMarkMap(latLngCurrent, R.drawable.marker_rounded_light_blue, null, null, Boolean.TRUE);
         } else {
             Log.d(TAG, "Error capturing current location");
         }
@@ -125,12 +130,13 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(TAG, String.format("Item data: %s Item position: %s", view.toString(), position));
-        if (position > 0) {
+        if (position > 0 && view != null) {
+            Log.d(TAG, String.format("Item data: %s Item position: %s", view.toString(), position));
             TextView itemSelected = (TextView) view;
             TransportStationLocationTask transportStationLocationTask = new TransportStationLocationTask();
             try {
-                transportStationLocationTask.execute(itemSelected.getText().toString());
+                String query = URLEncoder.encode(itemSelected.getText().toString(), "UTF-8");
+                transportStationLocationTask.execute(query);
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -143,7 +149,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
 
     }
 
-    public static void addMarkMap(LatLng latLng, Integer markIcon, Boolean animated) {
+    public static void addMarkMap(LatLng latLng, Integer markIcon, String title, String snippet, Boolean animated) {
         CameraUpdate update = null;
 
         if (latLng != null) {
@@ -153,13 +159,40 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
                 update = CameraUpdateFactory.newLatLngZoom(latLng, 17);
                 map.animateCamera(update);
             }
-            map.addMarker(new MarkerOptions().position(latLng).icon(icon));
+            MarkerOptions markerOptions = new MarkerOptions().position(latLng).icon(icon);
+            if (title != null) {
+                markerOptions.title(title);
+            }
+            if (snippet != null) {
+                markerOptions.snippet(snippet);
+            }
+            Marker marker = map.addMarker(markerOptions);
+            marker.setVisible(Boolean.TRUE);
+            marker.showInfoWindow();
         } else {
             Log.d(TAG, "Error capturing current location");
         }
     }
 
-    public static void addMarkMap(LatLng latLng, Integer markIcon) {
-        addMarkMap(latLng, markIcon, Boolean.FALSE);
+    public static void setNearestLocation(LatLng compareTo, String title, String snippet) {
+        Location location = map.getMyLocation();
+        float[] results = new float[1];
+        Location.distanceBetween(location.getLatitude(), location.getLongitude(), compareTo.latitude, compareTo.longitude, results);
+        if (distanceTo > results[0]) {
+            distanceTo = results[0];
+            latLngNearest = compareTo;
+            latLngNearestTitle = title;
+            latLngNearestSnippet = snippet;
+        }
+    }
+
+    public static void addNearestLatLngMarkMap() {
+        if(latLngNearest != null) {
+            addMarkMap(latLngNearest, R.drawable.marker_rounded_yellow_orange, latLngNearestTitle, latLngNearestSnippet, Boolean.TRUE);
+        }
+    }
+
+    public static void addMarkMap(LatLng latLng, String title, String snippet, Integer markIcon) {
+        addMarkMap(latLng, markIcon, title, snippet, Boolean.FALSE);
     }
 }

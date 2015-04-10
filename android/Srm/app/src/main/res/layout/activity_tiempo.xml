@@ -5,7 +5,8 @@
     android:orientation="vertical"
     tools:context="com.falcotech.srm.TiempoActivity"
     android:baselineAligned="true"
-    android:background="#ff24b7ff">
+    android:background="#ff24b7ff"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -37,8 +38,9 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/scrollView">
         <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -59,7 +61,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/label_service_type"
                     android:id="@+id/textView9"
-                    android:layout_centerHorizontal="true"
                     android:layout_row="0"
                     android:layout_column="0"
                     android:padding="5dp"
@@ -69,7 +70,7 @@
                 <Spinner
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spServiceType"
+                    android:id="@+id/spServiceTypeTiempo"
                     android:layout_centerVertical="true"
                     android:layout_row="0"
                     android:layout_column="1"
@@ -121,11 +122,29 @@
                     android:layout_column="1"
                     android:spinnerMode="dialog" />
             </GridLayout>
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Calcular Tiempo"
+                android:id="@+id/btnCalcular"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
 
     </ScrollView>
 
-
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/txtResultadoTiempo"
+        android:layout_below="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/edittextmensaje"
+        android:layout_alignParentStart="false" />
 
 </RelativeLayout>

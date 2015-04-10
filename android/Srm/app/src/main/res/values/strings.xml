@@ -19,6 +19,14 @@
     <string name="prompt_locations_update">Buscando estaciones en línea</string>
     <string name="title_locations_update">Espere por favor, esta operación puede tardar algunos segundos</string>
     <string name="data_locations_update">No se encontraron estaciones para el servicio seleccionado</string>
+    <string name="label_price">Monto S/.</string>
+    <string name="hint_price">Monto a cargar</string>
+    <string name="hint_card_number">Número de tarjeta</string>
+    <string name="label_card_service">Tarjeta de transporte</string>
+    <string name="action_pay">Recargar</string>
+    <string name="action_pay_cancel">Cancelar</string>
+    <string name="message_payment_ok">La recarga se realizo satisfactoriamente</string>
+    <string name="action_payment">Aceptar</string>
 
     <string name="title_activity_pago">PagoActivity</string>
 

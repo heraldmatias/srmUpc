@@ -3,8 +3,9 @@ package com.falcotech.srm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.Menu;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,59 +13,53 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.falcotech.srm.util.TimePickerFragment;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+
+import java.math.BigDecimal;
 
 
 public class PagoActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private Spinner spServicio,spBanco,dateMes,dateAnno ;
-    private EditText txtNumeroCuenta,txtMonto, txtCodVer, txtNumeroTarjeTransporte;
-    private Button btnRecarga,btnCancelar;
+    public static final String TAG = "PagoActivity";
+
+    Spinner spServicio;
+    Button btnRecarga, btnCancelar;
+    EditText txtMonto;
+    EditText txtNumeroTarjeTransporte;
+
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
+            // or live (ENVIRONMENT_PRODUCTION)
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId("AXv6izNPjU3jidb9XHZcnRrqixkm8agQQ7RGnNwabH2mvw7C5aVivfAcAos8LY3jeY9WXiW0oVEscpcZ");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago);
-       // getActionBar().hide();
-
+        // getActionBar().hide();
         spServicio = (Spinner) findViewById(R.id.spServicio);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.servicioTransporte, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spServicio.setAdapter(adapter);
         spServicio.setOnItemSelectedListener(this);
 
-        spBanco = (Spinner) findViewById(R.id.spBanco);
-        adapter = ArrayAdapter.createFromResource(this, R.array.bancos, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spBanco.setAdapter(adapter);
-        spBanco.setOnItemSelectedListener(this);
+        txtMonto = (EditText) findViewById(R.id.txtMonto);
+        txtNumeroTarjeTransporte = (EditText) findViewById(R.id.txtNumeroTarjeTransporte);
 
-        dateMes = (Spinner) findViewById(R.id.dateMes);
-        adapter = ArrayAdapter.createFromResource(this, R.array.meses, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dateMes.setAdapter(adapter);
-        dateMes.setOnItemSelectedListener(this);
-
-        dateAnno = (Spinner) findViewById(R.id.dateAnno);
-        adapter = ArrayAdapter.createFromResource(this, R.array.annos, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dateAnno.setAdapter(adapter);
-        dateAnno.setOnItemSelectedListener(this);
-
-
-
-        txtNumeroCuenta = (EditText)findViewById(R.id.TxtNumeroCuenta);
-        txtMonto = (EditText)findViewById(R.id.txtMonto);
-        txtCodVer = (EditText)findViewById(R.id.txtCodVer);
-        txtNumeroTarjeTransporte = (EditText)findViewById(R.id.txtNumeroTarjeTransporte);
-
-        btnRecarga = (Button)findViewById(R.id.btnRecarga);
+        btnRecarga = (Button) findViewById(R.id.btnRecarga);
         btnRecarga.setOnClickListener(this);
-
-        btnCancelar = (Button)findViewById(R.id.btnCancelar);
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(this);
 
+        initPayment();
     }
 
     @Override
@@ -83,11 +78,6 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "Fecha de Vencimiento");
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -100,15 +90,64 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
 
     @Override
     public void onClick(View v) {
-        if(v!=null){
-            switch (v.getId()){
+        if (v != null) {
+            switch (v.getId()) {
                 case R.id.btnRecarga:
-                    startActivity(new Intent(this, MensajeActivity.class));
+                    doPayment();
                     break;
                 case R.id.btnCancelar:
                     startActivity(new Intent(this, MenuActivity.class));
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "requestCode: " + requestCode);
+        Log.i(TAG, "resultCode: " + resultCode);
+        if (resultCode == RESULT_OK) {
+            startActivity(new Intent(this, MensajeActivity.class));
+        }
+        //super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void initPayment() {
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        startService(intent);
+    }
+
+    private void doPayment() {
+        if (validPayment()) {
+            String price = txtMonto.getText().toString();
+            String serviceType = spServicio.getSelectedItem().toString();
+            PayPalPayment payment = new PayPalPayment(new BigDecimal(price), "USD", "Recarga de " + serviceType,
+                    PayPalPayment.PAYMENT_INTENT_SALE);
+            Intent intent = new Intent(this, PaymentActivity.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+            startActivityForResult(intent, 0);
+        }
+    }
+
+    private Boolean validPayment() {
+        Boolean result = Boolean.FALSE;
+        if (spServicio.getSelectedItem() == null) {
+            Toast.makeText(this, "Debe seleccionar el tipo de servicio", Toast.LENGTH_SHORT).show();
+        } else if (txtMonto.getText().toString().equals("")) {
+            Toast.makeText(this, "Debe seleccionar ingresar el monto de recarga", Toast.LENGTH_SHORT).show();
+        } else if (txtNumeroTarjeTransporte.getText().toString().equals("")) {
+            Toast.makeText(this, "Debe ingresar el número de tarjeta de servicio", Toast.LENGTH_SHORT).show();
+        } else {
+            result = Boolean.TRUE;
+        }
+        return result;
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, PayPalService.class));
+        super.onDestroy();
     }
 }

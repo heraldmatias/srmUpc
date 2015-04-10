@@ -1,8 +1,8 @@
 package com.falcotech.srm;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +15,6 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
     ImageButton btnTime;
     ImageButton btnMap;
     ImageButton btnExit;
-
-    private ImageButton btnPago,btnTiempo,btnSalir;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +31,6 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
         btnTime.setOnClickListener(this);
         btnMap.setOnClickListener(this);
         //getActionBar().hide();
-        btnPago = (ImageButton) findViewById(R.id.btnPago);
-        btnTiempo = (ImageButton) findViewById(R.id.btnTiempo);
-        btnSalir = (ImageButton) findViewById(R.id.btnSalir);
-
-        btnPago.setOnClickListener(this);
-        btnMap.setOnClickListener(this);
-        btnTiempo.setOnClickListener(this);
-        btnSalir.setOnClickListener(this);
-
     }
 
 
@@ -65,19 +53,21 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()) {
-                case R.id.btnPago:
-                    startActivity(new Intent(this, PagoActivity.class));
-                    break;
+            case R.id.btnPago:
+                startActivity(new Intent(this, PagoActivity.class));
+                break;
             case R.id.btnMapa:
                 startActivity(new Intent(this, MapActivity.class));
-                    break;
-                case R.id.btnTiempo:
-                    startActivity(new Intent(this, TiempoActivity.class));
-                    break;
-                case R.id.btnSalir:
-                    // i'm lazy, do nothing
-                    break;
-            }
+                break;
+            case R.id.btnTiempo:
+                startActivity(new Intent(this, TiempoActivity.class));
+                break;
+            case R.id.btnSalir:
+                // i'm lazy, do nothing
+                break;
         }
     }
+
+
+}
 
