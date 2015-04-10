@@ -193,11 +193,11 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
         JSONObject jsonObj,jsonItem;
         JSONArray jsonEstadisticas;
         Calendar calendario = Calendar.getInstance();
-        int hora = 20;//calendario.get(Calendar.HOUR_OF_DAY);
+        int hora = calendario.get(Calendar.HOUR_OF_DAY);
         Iterator itr2 = listaPuntos.keySet().iterator();
         try {
             String msg = "";
-            //if( hora>7 && hora<23 ) {
+            if( hora>7 && hora<23 ) {
                 while (itr2.hasNext()) {
                     String key = (String) itr2.next();
                     if (pi == count) {
@@ -221,19 +221,13 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                     }
                     count++;
                 }
-                if (acumulador < 500) {
-                    acumulador = acumulador / (5);
-                    msg = "Desde que ingresa a estaci\u00F3n el tiempo de llegada a su destino sera entre " + (5 + acumulador) + " y " + (12 + acumulador) + " min.";
-                } else if (acumulador < 1000) {
-                    acumulador = acumulador / (50);
-                    msg = "Desde que ingresa a estaci\00F3n el tiempo de llegada a su destino sera entre " + (8 + acumulador) + " y " + (14 + acumulador) + " min.";
-                } else {
-                    acumulador = acumulador / (100);
-                    msg = "Desde que ingresa a estaci\00F3n el tiempo de llegada a su destino sera entre " + (12 + acumulador) + " y " + (18 + acumulador) + " min.";
-                }
-            /*}else{
+                System.out.println(difere);
+                System.out.println(acumulador);
+                msg = "Desde que ingresa a estaci\00F3n el tiempo de llegada a su destino sera entre " + ((acumulador-difere)/17) + " y " + (acumulador/15) + " min.";
+
+            }else{
                 msg = "Esta fuera del servicio, el servicio se restablece dentro de las 7:00 horas hasta las 22:00 horas";
-            }*/
+            }
             txtResultadoTiempo.setText(msg);
         } catch (JSONException e) {
             e.printStackTrace();
