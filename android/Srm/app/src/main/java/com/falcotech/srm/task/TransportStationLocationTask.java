@@ -60,7 +60,9 @@ public class TransportStationLocationTask extends AsyncTask<String, Integer, Str
             try {
                 JSONArray jsonArray = RestPostHelper.getJsonArray(result);
                 LatLng latLng = null;
+                MapActivity.distanceTo = Float.MAX_VALUE;
                 MapActivity.map.clear();
+
                 for (int index = 0; index < jsonArray.length(); index++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(index);
 
@@ -75,6 +77,7 @@ public class TransportStationLocationTask extends AsyncTask<String, Integer, Str
                             address = jsonObject.optString("direccion", null);
                         }
                         if ((location.has("latitud") & !location.isNull("latitud")) && (location.has("longitud") & !location.isNull("longitud"))) {
+                            Log.i(TAG,"name:"+name+" - address:"+address+" - longitud"+location.getString("longitud")+" - longitud"+location.getString("latitud"));
                             latLng = new LatLng(Double.parseDouble(location.getString("longitud")), Double.parseDouble(location.getString("latitud")));
                             MapActivity.addMarkMap(latLng, name, address, R.drawable.marker_rounded_red);
                             MapActivity.setNearestLocation(latLng, name, address);

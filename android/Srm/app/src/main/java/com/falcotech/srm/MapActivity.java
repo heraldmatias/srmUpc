@@ -46,7 +46,7 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
     private static String latLngNearestTitle;
     private static String latLngNearestSnippet;
     private LatLng latLngCurrent;
-    private static float distanceTo = Float.MAX_VALUE;
+    public static float distanceTo = Float.MAX_VALUE;
 
     Spinner spServiceType;
     public static Context staticThis;
