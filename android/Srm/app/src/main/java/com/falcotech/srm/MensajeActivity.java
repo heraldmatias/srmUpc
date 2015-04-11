@@ -7,12 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class MensajeActivity extends ActionBarActivity implements View.OnClickListener {
 
     Button btnConfirmPayment;
-
+    private TextView msgResultado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,10 @@ public class MensajeActivity extends ActionBarActivity implements View.OnClickLi
 
         btnConfirmPayment = (Button) findViewById(R.id.btnConfirmPayment);
         btnConfirmPayment.setOnClickListener(this);
+        Bundle extras = getIntent().getExtras();
+        String text = extras.getString("mensajeResultado");
+        msgResultado = (TextView) findViewById(R.id.msgResultado);
+        msgResultado.setText(text);
     }
 
     @Override

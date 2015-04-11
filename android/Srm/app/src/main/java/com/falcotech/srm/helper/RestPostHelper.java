@@ -49,14 +49,14 @@ public class RestPostHelper {
     }
 
     public static synchronized String run(String URL, HashMap<String, Object> parameters) throws ApiException {
+        Log.i(TAG, "Leer url:"+URL);
         HttpParams my_httpParams = new BasicHttpParams();
-        HttpConnectionParams.setConnectionTimeout(my_httpParams, 3000);
+        HttpConnectionParams.setConnectionTimeout(my_httpParams, 5000);
         HttpConnectionParams.setSoTimeout(my_httpParams, 1);
 
         String strResponse = null;
         HttpClient client = new DefaultHttpClient(my_httpParams);
         HttpPost request = new HttpPost(URL);
-        Log.d(TAG, "va leer url");
         try {
             if(parameters != null) {
                 List<NameValuePair> params = new ArrayList<>();
@@ -82,10 +82,10 @@ public class RestPostHelper {
             strResponse = new String(content.toByteArray());
             Log.d(TAG, "JSON RESPONSE : " + strResponse);
         } catch (ClientProtocolException e) {
-            Log.e(TAG, "ERROR CONNECTING TO REMOTE HOST : " + e.getMessage());
+            Log.e(TAG, "ERROR CONNECTING TO REMOTE HOST : " + e.getMessage(),e);
             throw new ApiException("Ocurrio un error al conectar al servidor" + e.getMessage(), e);
         } catch (IOException e) {
-            Log.e(TAG, "ERROR READING RESPONSE DATA : " + e.getMessage());
+            Log.e(TAG, "ERROR READING RESPONSE DATA : " + e.getMessage(),e);
             throw new ApiException("Ocurrio un error al conectar al servidor" + e.getMessage(), e);
         }
 

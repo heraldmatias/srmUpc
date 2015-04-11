@@ -40,7 +40,7 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
     public static final String API_URL = "http://colibricomunicaciones.com/SRMCentral/Estaciones?tipoServicio=";
     private final static String TAG = TiempoActivity.class.getName();
     private Button btnCalcular;
-    private EditText txtResultadoTiempo;
+    private TextView txtResultadoTiempo;
     private Spinner spServiceTypeTiempo,spPuntoInicio,spPuntoDestino;
 
     private LinkedHashMap<String, String> listaPuntos;
@@ -61,35 +61,36 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
         spServiceTypeTiempo.setOnItemSelectedListener(this);
         spPuntoInicio = (Spinner) findViewById(R.id.spPuntoInicio);
         spPuntoDestino = (Spinner) findViewById(R.id.spPuntoDestino);
-        txtResultadoTiempo = (EditText) findViewById(R.id.txtResultadoTiempo);
+        txtResultadoTiempo = (TextView) findViewById(R.id.txtResultadoTiempo);
+        //txtResultadoTiempo.setEnabled(false);
     }
 
     private void cargarSpinners(String respuesta) {
         txtResultadoTiempo.setText("");
         Log.i(TAG, "respuesta:"+respuesta);
+
         try {
             JSONArray jsonArray = RestPostHelper.getJsonArray(respuesta);
             JSONObject jsonObject ;
-            String[] arrayp = new String[jsonArray.length()],arrayd = new String[jsonArray.length()];
+            String[] arrayp = new String[jsonArray.length()];
             for (int index = 0; index < jsonArray.length(); index++) {
                 jsonObject = jsonArray.getJSONObject(index);
                 arrayp[index] = jsonObject.getString("nombre");
                 listaPuntos.put(arrayp[index],jsonObject.toString());
             }
 
-            Log.i(TAG, "arrayp:"+arrayp);
-
-            arrayd = arrayp.clone();
+            Log.d(TAG, "arrayp:"+arrayp);
 
             ArrayAdapter<CharSequence> adaptador = new ArrayAdapter<CharSequence>(
                     this, android.R.layout.simple_spinner_item, arrayp);
             spPuntoInicio.setAdapter(adaptador);
 
             adaptador = new ArrayAdapter<CharSequence>(
-                    this, android.R.layout.simple_spinner_item, arrayd);
+                    this, android.R.layout.simple_spinner_item, arrayp);
             spPuntoDestino.setAdapter(adaptador);
+
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Parseo Json", e);
         }
 
         txtResultadoTiempo.setText("");
@@ -115,7 +116,7 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                 }
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Select Item", e);
         }
 
     }
@@ -163,27 +164,30 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                     String pServicio = itemSelected.getText().toString();
                     itemSelected = (TextView) spPuntoInicio.getSelectedView();
                     pi = spPuntoInicio.getSelectedItemPosition();
-                    String pInicio = itemSelected.getText().toString();
-                    itemSelected = (TextView) spPuntoDestino.getSelectedView();
-                    pd = spPuntoDestino.getSelectedItemPosition();
-                    String pDestino = itemSelected.getText().toString();
-                    if( !pServicio.trim().equals("Seleccione") && !pInicio.trim().equals("")&&!pDestino.trim().equals("")){
-                        int temp = 0;
-                        if(pi<pd){
-                            difere = pd-pi;
-                        }else{
-                            temp = pi;
-                            pi = pd;
-                            pd = temp;
-                            difere = pd-pi;
+                    if(itemSelected!=null){
+                        String pInicio = itemSelected.getText().toString();
+                        itemSelected = (TextView) spPuntoDestino.getSelectedView();
+                        pd = spPuntoDestino.getSelectedItemPosition();
+                        if(itemSelected!=null){
+                            String pDestino = itemSelected.getText().toString();
+                            if( !pServicio.trim().equals("Seleccione") && !pInicio.trim().equals("")&&!pDestino.trim().equals("")){
+                                int temp = 0;
+                                if(pi<pd){
+                                    difere = pd-pi;
+                                }else{
+                                    temp = pi;
+                                    pi = pd;
+                                    pd = temp;
+                                    difere = pd-pi;
+                                }
+                                calcularTiempoDeDestino();
+                            }
                         }
-                        calcularTiempoDeDestino();
                     }
                 }
             }
         }
     }
-
 
     private void calcularTiempoDeDestino() {
         int count = 0;
@@ -198,6 +202,9 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
         try {
             String msg = "";
             if( hora>7 && hora<23 ) {
+                Log.d(TAG, String.valueOf(pi));
+                Log.d(TAG, String.valueOf(pd));
+                Log.d(TAG, String.valueOf(hora));
                 while (itr2.hasNext()) {
                     String key = (String) itr2.next();
                     if (pi == count) {
@@ -214,23 +221,24 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                         jsonEstadisticas = jsonObj.getJSONArray("estadisticas");
                         for (int index = 0; index < jsonEstadisticas.length(); index++) {
                             jsonItem = jsonEstadisticas.getJSONObject(index);
-                            if (jsonItem.get("horaInicio").equals(String.valueOf(hora) + ":00")) {
+                            if (jsonItem.get("horaInicio").equals(String.valueOf((hora<10)?("0"+hora):hora) + ":00")) {
+                                System.out.println(jsonItem.get("horaInicio"));
                                 acumulador += Integer.valueOf(jsonItem.getInt("cantidad"));
                             }
                         }
                     }
                     count++;
                 }
-                System.out.println(difere);
-                System.out.println(acumulador);
-                msg = "Desde que ingresa a estaci\00F3n el tiempo de llegada a su destino sera entre " + ((acumulador-difere)/17) + " y " + (acumulador/15) + " min.";
+                Log.d(TAG, String.valueOf(difere));
+                Log.d(TAG, String.valueOf(acumulador));
+                msg = "Desde que aborda el transporte, el tiempo de llegada a su destino sera entre " + ((acumulador-difere)/17) + " y " + (acumulador/15) + " min.";
 
             }else{
                 msg = "Esta fuera del servicio, el servicio se restablece dentro de las 7:00 horas hasta las 22:00 horas";
             }
             txtResultadoTiempo.setText(msg);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG,"Error de parseo Json",e);
         }
     }
 
@@ -259,7 +267,7 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                 return response;
 
             } catch (RestPostHelper.ApiException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Get Data json", e);
             }
             return "";
         }

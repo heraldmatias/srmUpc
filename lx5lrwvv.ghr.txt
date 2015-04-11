@@ -1,0 +1,19 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 2 and 24 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# Changes to be committed:
+#	modified:   android/Srm/.idea/workspace.xml
+#	modified:   android/Srm/app/src/main/java/com/falcotech/srm/TiempoActivity.java
+#
+# Changes not staged for commit:
+#	modified:   android/Srm/.idea/workspace.xml
+#	deleted:    android/Srm/app/src/main/java/com/falcotech/srm/UbicaActivity.java
+#	deleted:    android/Srm/app/src/main/res/layout/activity_ubica.xml
+#	deleted:    android/Srm/app/src/main/res/menu/menu_ubica.xml
+#
+

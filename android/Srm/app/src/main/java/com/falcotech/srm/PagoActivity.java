@@ -1,6 +1,9 @@
 package com.falcotech.srm;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -16,13 +19,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.falcotech.srm.helper.RestPostHelper;
+import com.falcotech.srm.util.CommonUtilities;
+import com.falcotech.srm.util.GCMConstants;
 import com.falcotech.srm.util.TimePickerFragment;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class PagoActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -107,7 +118,37 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
         Log.i(TAG, "requestCode: " + requestCode);
         Log.i(TAG, "resultCode: " + resultCode);
         if (resultCode == RESULT_OK) {
-            startActivity(new Intent(this, MensajeActivity.class));
+            Context app = getApplicationContext();
+            Intent intent =new Intent(this, MensajeActivity.class);
+            intent.putExtra("mensajeResultado", app.getResources().getString(R.string.message_payment_ok));
+
+            SharedPreferences prefs = getSharedPreferences(HomeActivity.class.getSimpleName(), Context.MODE_PRIVATE);
+            final String registrationId = prefs.getString(GCMConstants.PROPERTY_REG_ID, "");
+
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... params) {
+                    String msg = "";
+                    try {
+                        String consulta = CommonUtilities.SERVER_URL+"pago";
+                        HashMap<String,Object> paramPost = new HashMap<String, Object>();
+                        paramPost.put("regId",registrationId);
+                        String response = RestPostHelper.run(consulta, paramPost);
+                        Log.i(TAG, "response el pago en central:" + response);
+                    } catch (Exception e) {
+                        Log.e(TAG,"Pago",e);
+                    }
+                    return msg;
+                }
+
+                @Override
+                protected void onPostExecute(String msg) {
+
+                    Log.i(TAG,msg + "\n");
+                }
+            }.execute(null, null, null);
+
+            startActivity(intent);
         }
         //super.onActivityResult(requestCode, resultCode, data);
     }

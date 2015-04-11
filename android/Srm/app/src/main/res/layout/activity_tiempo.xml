@@ -78,7 +78,8 @@
                     android:layout_toEndOf="@+id/txtServiceType"
                     android:prompt="@string/prompt_service_type"
                     android:entries="@array/service_type_array"
-                    android:spinnerMode="dialog" />
+                    android:spinnerMode="dialog"
+                    android:focusable="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,10 +137,9 @@
 
     </ScrollView>
 
-    <EditText
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/txtResultadoTiempo"
         android:layout_below="@+id/scrollView"
