@@ -51,6 +51,15 @@ public class MensajeActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        startActivity(new Intent(this, MenuActivity.class));
+       // startActivity(new Intent(this, MenuActivity.class));
+        finish();
     }
+
+   /* @Override
+    public void onBackPressed()
+    {
+
+        finish();
+
+    }*/
 }

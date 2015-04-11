@@ -195,4 +195,11 @@ public class MapActivity extends ActionBarActivity implements LocationListener, 
     public static void addMarkMap(LatLng latLng, String title, String snippet, Integer markIcon) {
         addMarkMap(latLng, markIcon, title, snippet, Boolean.FALSE);
     }
+    public void onBackPressed()
+    {
+
+        finish();
+
+    }
+
 }

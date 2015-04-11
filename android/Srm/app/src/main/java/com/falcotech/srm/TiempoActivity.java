@@ -279,4 +279,12 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
         }
 
     }
+
+    @Override
+    public void onBackPressed()
+    {
+
+        finish();
+
+    }
 }

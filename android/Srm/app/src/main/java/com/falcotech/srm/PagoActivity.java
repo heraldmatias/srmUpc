@@ -107,7 +107,7 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
                     doPayment();
                     break;
                 case R.id.btnCancelar:
-                    startActivity(new Intent(this, MenuActivity.class));
+                    onBackPressed();
                     break;
             }
         }
@@ -116,7 +116,6 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i(TAG, "requestCode: " + requestCode);
-        Log.i(TAG, "resultCode: " + resultCode);
         if (resultCode == RESULT_OK) {
             Context app = getApplicationContext();
             Intent intent =new Intent(this, MensajeActivity.class);
@@ -132,11 +131,11 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
                     try {
                         String consulta = CommonUtilities.SERVER_URL+"pago";
                         HashMap<String,Object> paramPost = new HashMap<String, Object>();
-                        TextView itemSelected = (TextView) spServicio.getSelectedView();
                         paramPost.put("regId",registrationId);
-                        paramPost.put("servicio",itemSelected.getText().toString());
+                        paramPost.put("servicio",spServicio.getSelectedItem().toString());
                         paramPost.put("monto",txtMonto.getText().toString());
                         paramPost.put("numeroTarjeta",txtNumeroTarjeTransporte.getText().toString());
+                        Log.i(TAG, "paramPost:" + paramPost);
                         String response = RestPostHelper.run(consulta, paramPost);
                         Log.i(TAG, "response el pago en central:" + response);
                     } catch (Exception e) {
@@ -166,7 +165,9 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
     private void doPayment() {
         if (validPayment()) {
             String price = txtMonto.getText().toString();
+            Log.i(TAG, "price: " + price);
             String serviceType = spServicio.getSelectedItem().toString();
+            Log.i(TAG, "serviceType: " + serviceType);
             PayPalPayment payment = new PayPalPayment(new BigDecimal(price), "USD", "Recarga de " + serviceType,
                     PayPalPayment.PAYMENT_INTENT_SALE);
             Intent intent = new Intent(this, PaymentActivity.class);
@@ -195,4 +196,13 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
         stopService(new Intent(this, PayPalService.class));
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed()
+    {
+
+           finish();
+
+    }
+
 }

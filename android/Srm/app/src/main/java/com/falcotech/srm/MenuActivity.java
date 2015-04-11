@@ -63,11 +63,18 @@ public class MenuActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(new Intent(this, TiempoActivity.class));
                 break;
             case R.id.btnSalir:
-                // i'm lazy, do nothing
+                onBackPressed();
                 break;
         }
     }
 
+
+    public void onBackPressed()
+    {
+
+        finish();
+
+    }
 
 }
 

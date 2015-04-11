@@ -196,10 +196,10 @@ public class CentralController {
 				// .collapseKey(collapseKey)
 				.timeToLive(30).delayWhileIdle(true)
 				.addData("message", "Resultado de transferencia: Pago Realizado satisfactoriamente\n"+
-									"Servicio:"+servicio+"\n"+
-									"Numero de Tarjeta:"+numeroTarjeta+"\n"+
-									"Monto:"+monto+"\n"+
-									"Numero de Transferencia:"+(new Random().nextInt(1565165))
+									"Servicio: "+servicio+"\n"+
+									"Numero de Tarjeta: "+numeroTarjeta+"\n"+
+									"Monto en soles: S/. "+monto+" nuevo(s) sole(s) \n"+
+									"Numero de Transferencia: "+(new Random().nextInt(1565165))
 									).build();
 		System.out.println(message);
 		System.out.println(message.getCollapseKey());
