@@ -132,7 +132,11 @@ public class PagoActivity extends ActionBarActivity implements AdapterView.OnIte
                     try {
                         String consulta = CommonUtilities.SERVER_URL+"pago";
                         HashMap<String,Object> paramPost = new HashMap<String, Object>();
+                        TextView itemSelected = (TextView) spServicio.getSelectedView();
                         paramPost.put("regId",registrationId);
+                        paramPost.put("servicio",itemSelected.getText().toString());
+                        paramPost.put("monto",txtMonto.getText().toString());
+                        paramPost.put("numeroTarjeta",txtNumeroTarjeTransporte.getText().toString());
                         String response = RestPostHelper.run(consulta, paramPost);
                         Log.i(TAG, "response el pago en central:" + response);
                     } catch (Exception e) {

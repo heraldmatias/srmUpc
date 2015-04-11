@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -179,7 +180,7 @@ public class CentralController {
 
 	@RequestMapping(value = "/pago", method = RequestMethod.POST)
 	public @ResponseBody
-	int pagotarjeta(String regId) {
+	int pagotarjeta(String regId,String servicio,String numeroTarjeta,String monto) {
 		Sender sender = GCMUtil.newSender(config);
 		String registrationId = regId;
 		// Message message = new Message.Builder().build();
@@ -194,7 +195,12 @@ public class CentralController {
 				// it goes back on-line.
 				// .collapseKey(collapseKey)
 				.timeToLive(30).delayWhileIdle(true)
-				.addData("message", "Pago Realizado satisfactoriamente").build();
+				.addData("message", "Resultado de transferencia: Pago Realizado satisfactoriamente\n"+
+									"Servicio:"+servicio+"\n"+
+									"Numero de Tarjeta:"+numeroTarjeta+"\n"+
+									"Monto:"+monto+"\n"+
+									"Numero de Transferencia:"+(new Random().nextInt(1565165))
+									).build();
 		System.out.println(message);
 		System.out.println(message.getCollapseKey());
 		System.out.println(message.getData());

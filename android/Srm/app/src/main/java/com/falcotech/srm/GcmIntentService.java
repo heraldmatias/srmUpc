@@ -95,7 +95,7 @@ public class GcmIntentService extends IntentService {
 
         Log.i(TAG, msg);
         Intent intent = new Intent(this, MensajeActivity.class);
-        intent.putExtra("mensajeResultado", app.getResources().getString(R.string.message_payment_ok));
+        intent.putExtra("mensajeResultado", msg);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 
