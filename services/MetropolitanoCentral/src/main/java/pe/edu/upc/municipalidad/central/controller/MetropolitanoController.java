@@ -1,5 +1,7 @@
 package pe.edu.upc.municipalidad.central.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,15 +43,36 @@ public class MetropolitanoController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
-	public @ResponseBody List<Estacion> getEstaciones() {
-		return datefile.getEstaciones();
-	}
+//	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
+//	public @ResponseBody List<Estacion> getEstaciones() {
+//		return datefile.getEstaciones();
+//	}
 
-	@RequestMapping(value = "/Estaciones/{tipoServicio}", method = RequestMethod.GET)
-	public @ResponseBody List<Estacion> getEstaciones(
-			@PathVariable String tipoServicio) {
-		return datefile.getEstaciones(tipoServicio);
+	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
+	public @ResponseBody List<Estacion> getEstaciones( String tipoServicio) {
+		logger.info("tipoServicio:"+tipoServicio);
+//		try {
+//			tipoServicio = URLEncoder.encode(tipoServicio, "UTF-8");
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		List<Estacion> lst = null;
+		if(tipoServicio==null || tipoServicio.length() == 0){
+			lst = datefile.getEstaciones();
+		}else{
+			lst = datefile.getEstaciones(tipoServicio);
+		}
+		if(lst!=null){
+			for (Estacion e : lst) {
+				logger.info(String.valueOf(e.getId()));
+				if (e != null) {
+					e.setEstadisticas(datefile.getEstadisticas(e.getId()));
+					e.setUbicacion(datefile.getUbicaciones(e.getId()));
+				}
+			}
+		}		
+		return lst;
 	}
 
 	@RequestMapping(value = "/Estacion/{id}", method = RequestMethod.GET)
@@ -62,10 +85,16 @@ public class MetropolitanoController {
 		return e;
 	}
 
-	@RequestMapping(value = "/Estacion/Horario/{tipoServicio}/{horaInicio}/{horafin}", method = RequestMethod.GET)
+	@RequestMapping(value = "/Estacion/Horario/{horaInicio}/{horafin}", method = RequestMethod.GET)
 	public @ResponseBody List<Estacion> getEstacionHorario(
-			@PathVariable String tipoServicio, @PathVariable String horaInicio,
+			String tipoServicio, @PathVariable String horaInicio,
 			@PathVariable String horafin) {
+//		try {
+//			tipoServicio = URLEncoder.encode(tipoServicio, "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return datefile.getEstacionHorario(tipoServicio, horaInicio, horafin);
 	}
 

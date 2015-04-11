@@ -3,10 +3,14 @@ package pe.edu.upc.municipalidad.central.data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pe.edu.upc.municipalidad.central.beans.Estacion;
@@ -15,9 +19,15 @@ import pe.edu.upc.municipalidad.central.beans.Ubicacion;
 
 public class DataInstance {
 
+
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(DataInstance.class);
+	
 	@Autowired
 	private Propiedades properties;
-
+	
+	private Map<Long, Estacion> listaTemp;
 	private Map<Long, Estacion> lista;
 	private Map<Long, Estadistica> estadisticas;
 	private Map<Long, Ubicacion> ubicacions;
@@ -36,6 +46,7 @@ public class DataInstance {
 	}
 
 	private Map<Long, Ubicacion> transforTextoUbicacion(StringBuffer info) {
+		logger.info("Ubicaciones:"+info);
 		StringTokenizer tokens = new StringTokenizer(info.toString(),
 				properties.getValue("toke.dato"));
 		Map<Long, Ubicacion> lista = new HashMap<Long, Ubicacion>();
@@ -90,9 +101,9 @@ public class DataInstance {
 	private Map<Long, Estacion> transforTextoEstacion(StringBuffer info) {
 		StringTokenizer tokens = new StringTokenizer(info.toString(),
 				properties.getValue("toke.dato")), subitems = null ;
-		Map<Long, Estacion> lista = new HashMap<Long, Estacion>();
+		listaTemp = new HashMap<Long, Estacion>();
 		Estacion estacion = null;
-		String dtTemmp = null;
+		String dtTemmp = null,nombre;
 		while (tokens.hasMoreElements()) {
 			dtTemmp = tokens.nextElement().toString().trim();
 			if (dtTemmp.length() == 0) {
@@ -101,19 +112,52 @@ public class DataInstance {
 			estacion = new Estacion();
 			estacion.setId(Long.valueOf(dtTemmp));
 			dtTemmp = tokens.nextElement().toString().trim();
-			estacion.setNombre(dtTemmp);
-			dtTemmp = tokens.nextElement().toString().trim();
-			estacion.setDireccion(dtTemmp);
-			dtTemmp = tokens.nextElement().toString().trim();
-			estacion.setTipoServicio(dtTemmp);
-			dtTemmp = tokens.nextElement().toString().trim();
-			estacion.setSubServicios(dtTemmp);
-			dtTemmp = tokens.nextElement().toString().trim();
-			estacion.setSubServicios(dtTemmp);
-			
-			lista.put(estacion.getId(), estacion);
+			if(!exiteEstacion(dtTemmp)){
+				estacion.setNombre(dtTemmp);
+				dtTemmp = tokens.nextElement().toString().trim();
+				estacion.setDireccion(dtTemmp);
+				dtTemmp = tokens.nextElement().toString().trim();
+				estacion.setDistrito(dtTemmp);
+				dtTemmp = tokens.nextElement().toString().trim();
+				estacion.setTipoServicio(dtTemmp);
+				dtTemmp = tokens.nextElement().toString().trim();
+				estacion.setSubServicios(dtTemmp);
+				listaTemp.put(estacion.getId(), estacion);
+			}else{
+				nombre = dtTemmp;
+				dtTemmp = tokens.nextElement().toString().trim();
+				dtTemmp = tokens.nextElement().toString().trim();
+				dtTemmp = tokens.nextElement().toString().trim();
+				dtTemmp = tokens.nextElement().toString().trim();
+				addServicio(nombre, dtTemmp);
+			}
 		}
-		return lista;
+		return listaTemp;
+	}
+
+	private boolean exiteEstacion(String dtTemmp) {
+		Iterator entries = listaTemp.entrySet().iterator();
+		while (entries.hasNext()) {
+		  Entry thisEntry = (Entry) entries.next();
+		  Estacion value = (Estacion) thisEntry.getValue();
+		  if(value.getNombre().trim().equals(dtTemmp.trim())){
+			  return true;
+		  }
+		}
+		return false;
+	}
+	
+	private void addServicio(String nombre, String dtTemmp) {
+		Iterator entries = listaTemp.entrySet().iterator();
+		while (entries.hasNext()) {
+		  Entry thisEntry = (Entry) entries.next();
+		  Long key = (Long) thisEntry.getKey();
+		  Estacion value = (Estacion) thisEntry.getValue();
+		  if(value.getNombre().trim().equals(dtTemmp.trim())){
+			  value.setSubServicios(value.getSubServicios()+","+dtTemmp);		
+			  listaTemp.put(key, value);
+		  }
+		}
 	}
 
 	public List<Estacion> listarEstaciones() {

@@ -141,15 +141,18 @@ public class CentralController {
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////
 
+//	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
+//	public @ResponseBody
+//	List<Estacion> getEstaciones() {
+//		return centralService.getEstaciones();
+//	}
+
 	@RequestMapping(value = "/Estaciones", method = RequestMethod.GET)
 	public @ResponseBody
-	List<Estacion> getEstaciones() {
-		return centralService.getEstaciones();
-	}
-
-	@RequestMapping(value = "/Estaciones/{tipoServicio}", method = RequestMethod.GET)
-	public @ResponseBody
-	List<Estacion> getEstaciones(@PathVariable String tipoServicio) {
+	List<Estacion> getEstaciones(String tipoServicio) {
+		if(tipoServicio==null||tipoServicio.length()==0){
+			tipoServicio = "";
+		}		
 		return centralService.getEstaciones(tipoServicio);
 	}
 

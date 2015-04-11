@@ -7,6 +7,7 @@ public class Estacion {
 	private Long id;
 	private String nombre;
 	private String direccion;
+	private String distrito;
 	private String tipoServicio;
 	private String subServicios;
 	private String[] transportes;
@@ -61,6 +62,12 @@ public class Estacion {
 	}
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	public String getDistrito() {
+		return distrito;
+	}
+	public void setDistrito(String distrito) {
+		this.distrito = distrito;
 	}
 	
 	

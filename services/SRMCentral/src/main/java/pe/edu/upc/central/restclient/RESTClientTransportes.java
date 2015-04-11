@@ -2,6 +2,7 @@ package pe.edu.upc.central.restclient;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
@@ -17,11 +18,11 @@ import com.google.gson.reflect.TypeToken;
 @Component
 public class RESTClientTransportes extends RESTClient {
 	private static final Logger logger = LoggerFactory.getLogger(RESTClientTransportes.class);
-	private final static String URL="";
+	private final static String URL="http://colibricomunicaciones.com:8080/SimuladorMunicipalidad/";
 
 	public List<Estacion> getEstaciones(){
 		try {
-			String data = getConexion(URL, FORMAT);		
+			String data = getConexion(URL+"Estaciones", FORMAT);		
 			logger.debug(data);
 			Gson gson = new Gson();			
 			Type type = new TypeToken<List<Estacion>>(){}.getType();
@@ -37,7 +38,8 @@ public class RESTClientTransportes extends RESTClient {
 
 	public List<Estacion> getEstaciones(String tipo){
 		try {
-			String data = getConexion(URL+"/"+tipo, FORMAT);		
+			tipo = URLEncoder.encode(tipo, "UTF-8");
+			String data = getConexion(URL+"Estaciones/?tipoServicio="+tipo, FORMAT);		
 			logger.debug(data);	
 			Gson gson = new Gson();			
 			Type type = new TypeToken<List<Estacion>>(){}.getType();
@@ -68,7 +70,8 @@ public class RESTClientTransportes extends RESTClient {
 
 	public  List<Estacion> getEstacionHorario(String tipo, String horaInicio, String horaFin)  {
 		try {
-			String data = getConexion(URL+"/Estacion/"+tipo+"/"+horaInicio+"/"+horaFin, FORMAT);
+			tipo = URLEncoder.encode(tipo, "UTF-8");
+			String data = getConexion(URL+"/Estacion/"+horaInicio+"/"+horaFin+"/?tipoServicio="+tipo, FORMAT);
 			logger.debug(data);			
 			Gson gson = new Gson();			
 			Type type = new TypeToken<List<Estacion>>(){}.getType();

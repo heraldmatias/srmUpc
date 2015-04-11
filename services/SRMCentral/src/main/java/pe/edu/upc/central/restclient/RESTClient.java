@@ -3,6 +3,7 @@ package pe.edu.upc.central.restclient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -22,6 +23,7 @@ public abstract class RESTClient {
 	
 	protected String getConexion(String url, String format) throws ClientProtocolException,	IOException {
 		Client client = Client.create();
+		System.out.println(url);
 		WebResource webResource2 = client.resource(url);
 		ClientResponse response2 = webResource2.accept(format).get(ClientResponse.class);
 		if (response2.getStatus() != 200) {
@@ -35,6 +37,7 @@ public abstract class RESTClient {
 	@SuppressWarnings({ "resource" })
 	protected String postConexion(String url, String format, String jsonObject) throws ClientProtocolException,	IOException {
 		HttpClient client = new DefaultHttpClient();
+		System.out.println(url);
         HttpPost post = new HttpPost(url);
         StringEntity input = new StringEntity(jsonObject); //here instead of JSON you can also have XML
         input.setContentType(format);

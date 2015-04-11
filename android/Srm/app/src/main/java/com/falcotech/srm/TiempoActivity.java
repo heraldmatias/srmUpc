@@ -197,11 +197,11 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
         JSONObject jsonObj,jsonItem;
         JSONArray jsonEstadisticas;
         Calendar calendario = Calendar.getInstance();
-        int hora = calendario.get(Calendar.HOUR_OF_DAY);
+        int hora = 13;//calendario.get(Calendar.HOUR_OF_DAY);
         Iterator itr2 = listaPuntos.keySet().iterator();
         try {
             String msg = "";
-            if( hora>7 && hora<23 ) {
+         //   if( hora>7 && hora<23 ) {
                 Log.d(TAG, String.valueOf(pi));
                 Log.d(TAG, String.valueOf(pd));
                 Log.d(TAG, String.valueOf(hora));
@@ -233,9 +233,9 @@ public class TiempoActivity extends ActionBarActivity implements View.OnClickLis
                 Log.d(TAG, String.valueOf(acumulador));
                 msg = "Desde que aborda el transporte, el tiempo de llegada a su destino sera entre " + ((acumulador-difere)/17) + " y " + (acumulador/15) + " min.";
 
-            }else{
+          /*  }else{
                 msg = "Esta fuera del servicio, el servicio se restablece dentro de las 7:00 horas hasta las 22:00 horas";
-            }
+            }*/
             txtResultadoTiempo.setText(msg);
         } catch (JSONException e) {
             Log.e(TAG,"Error de parseo Json",e);

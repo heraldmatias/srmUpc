@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 public class RESTClientReniec extends RESTClient {
 	private static final Logger logger = LoggerFactory.getLogger(RESTClientReniec.class);
 
-	private final static String URL = "";
+	private final static String URL = "http://colibricomunicaciones.com:8080/SimuladorReniec/";
 
 	public Persona validar(String dni) {
 		try {
